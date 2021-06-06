@@ -1,6 +1,6 @@
 # vim-dotfiles
 
-## Configuration, plugins, dot files that I use to setup my vim 
+### Configuration, plugins, dot files that I use to setup my vim 
 
 ## Prerequisites
 - This is for *nix OS, linux, macos, etc.
