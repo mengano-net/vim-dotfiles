@@ -10,7 +10,7 @@ plugins I'm using (keep reading)
 
 ## Installation
 - I use vim plugins, so the first step is to install a plug-in manager, there are several 
-plug-in managersbut I've chosen to use [this one](https://github.com/junegunn/vim-plug)
+plug-in managers; I've chosen to use [this one](https://github.com/junegunn/vim-plug)
 - create directory ~/.vim
 - copy ~/.vim/mappings.vim into the same location in your local filesystem.
 - copy ~/.vimrc into the same location in your filesystem.
