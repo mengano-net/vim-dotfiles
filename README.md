@@ -8,7 +8,7 @@
 It must have the +conceal option compiled, this is needed for one of the
 plugins I'm using (keep reading) 
 
-$ Installation
+# Installation
 - I use vim plugins, so the first step is to install a plug-in manager, there are several 
 plug-in managersbut I've chosen to use [this one](https://github.com/junegunn/vim-plug)
 - create directory ~/.vim
