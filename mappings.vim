@@ -12,8 +12,7 @@ nnoremap <M-l>    :vertical resize +2<CR>
 " Alternative ESC with quick jk convo
 inoremap jk <Esc>
 
-" Better tabbing, allows slection to remain selected for hitting more/less
-" tabs
+" Better tabbing, allows slection to remain selected for hitting more/less tabs
 vnoremap < <gv
 vnoremap > >gv
 
