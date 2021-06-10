@@ -70,8 +70,15 @@ set splitright
 set wildmenu
 set wildmode=full
 
+" Only show the cursor line and column in the active buffer.
+augroup CursorLineColumn
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cuc
+  au WinLeave * setlocal nocursorline nocuc
+augroup END
+
 " ----------------------  sourcing files ---------------------------
-source ~/.vim/mappings.vim
+source ~/.vim/keymap/mappings.vim 
 
 " ----------------------  Plugins  ---------------------------
 " Plugins, see: https://github.com/junegunn/vim-plug
