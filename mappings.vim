@@ -16,4 +16,3 @@ inoremap jk <Esc>
 " tabs
 vnoremap < <gv
 vnoremap > >gv
-
