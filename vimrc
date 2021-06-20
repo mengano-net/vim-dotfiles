@@ -1,3 +1,4 @@
+set encoding=UTF-8
 syntax on
 set noerrorbells
 set tabstop=2 softtabstop=2
@@ -93,7 +94,16 @@ Plug 'Yggdroot/indentLine'
 Plug 'morhetz/gruvbox'
 
 " ctrl-p bring up a file browser
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+
+" NerdTree file browser
+Plug 'scrooloose/nerdtree'
+
+" NerdTree syntax highliter
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Adding icons to plugins, such as NerdTree
+Plug 'ryanoasis/vim-devicons'
 
 " Autocompletion
 Plug 'dense-analysis/ale'
@@ -110,6 +120,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " Better show whitespaces
 Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 " ----------------------  gruvbox plugin ---------------------------
@@ -140,4 +151,8 @@ let g:airline_theme='term'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" ---------------------- ctril-p  plugin options ---------------------------
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 
