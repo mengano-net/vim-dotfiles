@@ -35,9 +35,6 @@ set colorcolumn=100
 " Always show tab line
 set showtabline=2
 
-" statusline set to 'always'
-set laststatus=2
-
 " 256 color scheme for terminal
 set t_Co=256
 
