@@ -79,7 +79,7 @@ augroup ActiveBuffer
 augroup END
 
 " paste from vim into system clipboard
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " ----------------------  sourcing files ---------------------------
 source ~/.vim/keymap/mappings.vim
@@ -95,10 +95,6 @@ Plug 'morhetz/gruvbox'
 
 " ctrl-p bring up a file browser
 Plug 'ctrlpvim/ctrlp.vim'
-
-" NerdTree file browser, I do not think this project is actively maintained anymore,
-" this using the one below instead
-" Plug 'scrooloose/nerdtree'
 
 " Another NERDTree file browser
 Plug 'preservim/nerdtree'
