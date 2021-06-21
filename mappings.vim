@@ -1,3 +1,6 @@
+" Setting leader key
+" First make sure spacebar doesn't have any preexisting mappings
+nnoremap <SPACE> <Nop>
 " Set map leader
 let leader = " "
 
