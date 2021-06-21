@@ -1,3 +1,4 @@
+set encoding=UTF-8
 syntax on
 set noerrorbells
 set tabstop=2 softtabstop=2
@@ -19,6 +20,9 @@ set incsearch
 
 " Toggles pasting of indented code
 set pastetoggle=<F2>
+
+" Unset paste mode aboue on InsertLeave action, that is leaving insert mode
+autocmd InsertLeave * silent! set nopaste
 
 " set cursor line, cursor column and vertical bar at cloumn 100
 set cul
@@ -51,9 +55,6 @@ set wildignore+='*.swp,.git,.gitignore'
 
 " allows to change buffer without saving
 set hidden
-
-" Unset paste on InsertLeave.
-autocmd InsertLeave * silent! set nopaste
 
 " Spelling mistakes will be colored up red.
 hi SpellBad cterm=underline ctermfg=203 guifg=#ff5f5f
@@ -95,6 +96,19 @@ Plug 'morhetz/gruvbox'
 " ctrl-p bring up a file browser
 Plug 'ctrlpvim/ctrlp.vim'
 
+" NerdTree file browser, I do not think this project is actively maintained anymore,
+" this using the one below instead
+" Plug 'scrooloose/nerdtree'
+
+" Another NERDTree file browser
+Plug 'preservim/nerdtree'
+
+" NerdTree syntax highliter
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Adding icons to plugins, such as NerdTree
+Plug 'ryanoasis/vim-devicons'
+
 " Autocompletion
 Plug 'dense-analysis/ale'
 
@@ -110,6 +124,7 @@ Plug 'machakann/vim-highlightedyank'
 
 " Better show whitespaces
 Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 " ----------------------  gruvbox plugin ---------------------------
@@ -140,4 +155,8 @@ let g:airline_theme='term'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" ---------------------- ctril-p  plugin options ---------------------------
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 
