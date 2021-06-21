@@ -27,6 +27,6 @@ vnoremap > >gv
 nmap <leader>hk :vsplit ~/.vim/hotkeys.vim<CR>
 
 " NerdTree plugin maps
-nmap <leader>t :NERDTree<CR>
+nmap <leader>t :NERDTree<CR> :set modifiable<CR>
 nmap <leader>tc :NERDTreeClose<CR>
 
