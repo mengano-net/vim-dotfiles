@@ -149,6 +149,10 @@ let g:ale_fix_on_save = 1
 " ---------------------- vim-ariline  plugin options ---------------------------
 let g:airline_theme='term'
 let g:airline_detect_paste = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tab_count = 1
 
 " ---------------------- ctril-p  plugin options ---------------------------
 " See :h ctrlp-options
