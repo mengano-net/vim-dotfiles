@@ -21,6 +21,9 @@ set incsearch
 " Toggles pasting of indented code
 set pastetoggle=<F2>
 
+" Unset paste mode aboue on InsertLeave action, that is leaving insert mode
+autocmd InsertLeave * silent! set nopaste
+
 " set cursor line, cursor column and vertical bar at cloumn 100
 set cul
 set cuc
@@ -52,9 +55,6 @@ set wildignore+='*.swp,.git,.gitignore'
 
 " allows to change buffer without saving
 set hidden
-
-" Unset paste on InsertLeave.
-autocmd InsertLeave * silent! set nopaste
 
 " Spelling mistakes will be colored up red.
 hi SpellBad cterm=underline ctermfg=203 guifg=#ff5f5f
@@ -94,10 +94,14 @@ Plug 'Yggdroot/indentLine'
 Plug 'morhetz/gruvbox'
 
 " ctrl-p bring up a file browser
-" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
-" NerdTree file browser
-Plug 'scrooloose/nerdtree'
+" NerdTree file browser, I do not think this project is actively maintained anymore,
+" this using the one below instead
+" Plug 'scrooloose/nerdtree'
+
+" Another NERDTree file browser
+Plug 'preservim/nerdtree'
 
 " NerdTree syntax highliter
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
