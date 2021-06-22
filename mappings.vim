@@ -1,19 +1,13 @@
-" Setting leader key
-" First make sure spacebar doesn't have any preexisting mappings
-nnoremap <SPACE> <Nop>
-" Set map leader
-let leader = " "
-
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
 " Use alt + hjkl to resize windows
-" nnoremap <M-j>    :resize -2<CR>
-" nnoremap <M-k>    :resize +2<CR>
-" nnoremap <M-h>    :vertical resize -2<CR>
-" nnoremap <M-l>    :vertical resize +2<CR>
+" nnoremap <A-j>    :resize -2<CR>
+" nnoremap <A-k>    :resize +2<CR>
+" nnoremap <A-h>    :vertical resize -2<CR>
+" nnoremap <A-l>    :vertical resize +2<CR>
 
 " Alternative ESC with quick jk convo
 inoremap jk <Esc>
@@ -23,10 +17,14 @@ inoremap jk <Esc>
 vnoremap < <gv
 vnoremap > >gv
 
-" open hotkey help file on vertical split
-nmap <leader>hk :vsplit ~/.vim/hotkeys.vim<CR>
+" Setting map leader to space
+let mapleader = " "
 
-" NerdTree plugin maps
-nmap <leader>t :NERDTree<CR> :set modifiable<CR>
-nmap <leader>tc :NERDTreeClose<CR>
+" Open the hotkeys file in a non editable vertical split
+nmap <leader>hk :vsplit ~/.vim/hotkeys.vim <Bar> :vertical resize -20 <Bar> :setlocal nomodifiable<CR>
 
+" Open NERDTree in a slightly bigger vertical split.
+nnoremap <leader>t :NERDTreeFocus <Bar> :setlocal modifiable <Bar> :vertical resize +10 <Bar> :setlocal nomodifiable<CR>
+
+" Close NERDTree
+nnoremap <leader>tc :NERDTreeToggle<CR>
