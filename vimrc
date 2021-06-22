@@ -146,16 +146,27 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_filetype_changed = 1
 let g:ale_fix_on_save = 1
 
+
 " ---------------------- vim-ariline  plugin options ---------------------------
 " see :h airline
 let g:airline_theme='term'
 let g:airline_detect_paste = 1
-let g:airline#extensions#ale#enabled = 0
+
+" Skip empty sections
+let g:airline_skip_empty_sections = 1
+
+" Enable tabs above, wih each buffer opened
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tab_count = 1
-" Display only file name on section 'c' =, which is for filename
+
+" Omit full path on filename, on section 'c'
 let g:airline_section_c_only_filename = 1
+
+" Display only current line and column numbers on section z
+let g:airline_section_z = '%2l/%L☰%2v'
+
+" I'm not enabling ALE on sectionz, leaving it here in case I change my mind
+let g:airline#extensions#ale#enabled = 0
+
 
 " ---------------------- ctril-p  plugin options ---------------------------
 " See :h ctrlp-options
