@@ -68,7 +68,7 @@ set splitright
 set wildmenu
 set wildmode=full
 
-" Do not show these options in inactive buffers.
+" Do not show cursor lines in inactive buffers.
 augroup ActiveBuffer
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cuc
@@ -77,6 +77,9 @@ augroup END
 
 " paste from vim into system clipboard
 " set clipboard=unnamedplus
+
+" Tread '-' as a word separator
+set iskeyword+=-
 
 " ----------------------  sourcing files ---------------------------
 source ~/.vim/keymap/mappings.vim
@@ -144,12 +147,15 @@ let g:ale_lint_on_filetype_changed = 1
 let g:ale_fix_on_save = 1
 
 " ---------------------- vim-ariline  plugin options ---------------------------
+" see :h airline
 let g:airline_theme='term'
 let g:airline_detect_paste = 1
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tab_count = 1
+" Display only file name on section 'c' =, which is for filename
+let g:airline_section_c_only_filename = 1
 
 " ---------------------- ctril-p  plugin options ---------------------------
 " See :h ctrlp-options
