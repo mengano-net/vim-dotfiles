@@ -24,8 +24,3 @@ let mapleader = "\<Space>"
 " Open the hotkeys file in a non editable vertical split
 nmap <leader>hk :vsplit ~/.vim/hotkeys.vim <Bar> :vertical resize -10 <Bar> :setlocal nomodifiable<CR>
 
-" Open NERDTree in a slightly bigger vertical split.
-nnoremap <leader>t :NERDTreeFocus <Bar> :setlocal modifiable <Bar> :vertical resize +10 <Bar> :setlocal nomodifiable<CR>
-
-" Close NERDTree
-nnoremap <leader>tc :NERDTreeToggle<CR>
