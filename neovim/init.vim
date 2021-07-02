@@ -5,7 +5,7 @@ source ~/.config/nvim/mappings.vim
 
 " ----------------------  Plugins  ---------------------------
 " Plugins, see: https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
@@ -37,6 +37,11 @@ Plug 'tpope/vim-fugitive'
 
 " Add git gutter status information
 Plug 'airblade/vim-gitgutter'
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 

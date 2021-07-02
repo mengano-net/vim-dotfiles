@@ -1,8 +1,8 @@
 set encoding=UTF-8
 syntax on
 set noerrorbells
-set tabstop=2 softtabstop=2
-set shiftwidth=2
+set tabstop=4 softtabstop=4
+set shiftwidth=4
 set expandtab
 set smartindent
 
@@ -78,5 +78,40 @@ augroup END
 " Tread '-' as a word separator
 " set iskeyword+=-
 
+" Redrawtime in miliseconds to redraw buffer
+set redrawtime=1000
 
+" My editing defaults for yaml files
+augroup yamlfiles
+  " Set tabs to 2
+  autocmd BufReadPost,BufWinEnter *.yaml,*.yml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd BufWinLeave,BufDelete,BufWinLeave *.yaml,*.yml setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
+  " Remove empty line on writing buffers
+  autocmd BufWritePre *.yaml,*.yml silent! g/^$/d
+  " Remove trailing spaces on writing buffers
+  autocmd BufWritePre *.yaml,*.yml silent! %s/\s\+$//
+augroup END
+
+" Testing function to close the hotkeys buffers, if opened
+function! Toggle_hotkey()
+    for i in range(1, bufnr('$'))
+        let bnum = bufnr(i)
+        let bname = bufname(i)
+        echom bnum
+        echom bname
+        " if bname == '/home/ec2-user/.config/nvim/hotkeys.vim'
+        if bname == '/hotkeys.vim'
+            " :bdelete bnum
+            echom "found it!"
+            return
+        endif
+    endfor
+endfunction
+
+function! Test()
+    for i in range(1, bufnr('$'))
+        let bname = bufname(i)
+        echom bname
+    endfor
+endfunction
