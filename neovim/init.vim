@@ -1,10 +1,162 @@
-" ----------------------  sourcing files ---------------------------
-source ~/.config/nvim/defaults.vim
-source ~/.config/nvim/mappings.vim
+" #######################################################
+" My own set of 'basic' settings
+" #######################################################
+
+set encoding=UTF-8
+syntax on
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+
+" set numbers ruler, relative numbers
+set number
+set relativenumber
+set ruler
+
+set nowrap
+set nobackup
+set noswapfile
+set undodir=~/.config/nvim/undodir
+set undofile
+set incsearch
+
+" Toggles pasting of indented code
+set pastetoggle=<F2>
+
+" Unset paste mode aboue on InsertLeave action, that is leaving insert mode
+autocmd InsertLeave * silent! set nopaste
+
+" set cursor line, cursor column and vertical bar at cloumn 100
+set cul
+set cuc
+set colorcolumn=100
+
+" Always show tab line
+set showtabline=2
+
+" 256 color scheme for terminal
+set t_Co=256
+
+" set backspace to delete without insertion first
+set backspace=indent,eol,start
+
+" Not needed after airline Plug(it manages airlines)
+set noshowmode
+
+" Set path while searching for files
+set path+=.,**,
+
+" ignore pattern while expanding wildcard
+set wildignore+='*.swp,.git,.gitignore'
+
+" allows to change buffer without saving
+set hidden
+
+" Spelling mistakes will be colored up red.
+hi SpellBad cterm=underline ctermfg=203 guifg=#ff5f5f
+hi SpellLocal cterm=underline ctermfg=203 guifg=#ff5f5f
+hi SpellRare cterm=underline ctermfg=203 guifg=#ff5f5f
+hi SpellCap cterm=underline ctermfg=203 guifg=#ff5f5f
+set spelllang=en_us
+
+" Splitting below and right, more natural
+set splitbelow
+set splitright
+
+" Set menu wildmenu size, one that comes up during autocompletion
+set wildmenu
+set wildmode=full
+
+" Do not show cursor lines in inactive buffers.
+augroup ActiveBuffer
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cuc
+  au WinLeave * setlocal nocursorline nocuc
+augroup END
+
+" paste from vim into system clipboard
+" set clipboard=unnamedplus
+
+" Tread '-' as a word separator
+" set iskeyword+=-
+
+" Redrawtime in miliseconds to redraw buffer
+set redrawtime=1000
 
 
-" ----------------------  Plugins  ---------------------------
-" Plugins, see: https://github.com/junegunn/vim-plug
+" #######################################################
+" My mappings not related to plug-ins, etc.
+" Otherwise, those can be found in their related areas
+" #######################################################
+
+" Setting map leader to space
+let mapleader = "\<Space>"
+" let leader = "\<Space>"
+
+" TAB in normal mode will cycle through buffers
+nnoremap <TAB> :bnext<CR>
+" SHIFT-TAB will go back
+nnoremap <S-TAB> :bprevious<CR>
+
+" Use alt + hjkl to resize windows
+" nnoremap <A-j>    :resize -2<CR>
+" nnoremap <A-k>    :resize +2<CR>
+" nnoremap <A-h>    :vertical resize -2<CR>
+" nnoremap <A-l>    :vertical resize +2<CR>
+
+" Alternative ESC with quick jk convo
+inoremap jk <Esc>
+
+" Better navigatings splits
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Better tabbing, allows slection to remain selected for hitting more/less
+" tabs
+vnoremap < <gv
+vnoremap > >gv
+
+" Open the hotkeys help file in a non editable vertical split
+nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.vim <Bar> :vertical resize -15 <Bar> :setlocal nomodifiable<CR>
+
+" Enter :Config in normal mode to edit vim's configuration
+command! Config execute ":e ~/.config/nvim/init.vim"
+
+" Enter :Reload to apply latest vim configuration
+command! Reload execute "source ~/.config/nvim/init.vim"
+
+" Open nvim's built-in terminal in a below split
+nmap <leader>t :split term://zsh <Bar> :setlocal modifiable<CR>
+
+" With nvim's terminal, once you get into 'insert' mode, the escape sequence
+" is weird, so I'm making it easier
+tnoremap <Esc> <C-\><C-n>
+
+" #######################################################
+
+
+" #######################################################
+" My editing defaults for yaml files
+" #######################################################
+augroup yamlfiles
+  " Set tabs to 2
+  autocmd BufReadPost,BufWinEnter *.yaml,*.yml setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd BufWinLeave,BufDelete,BufWinLeave *.yaml,*.yml setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+  " Remove empty line on writing buffers
+  autocmd BufWritePre *.yaml,*.yml silent! g/^$/d
+  " Optionaly, remove trailing spaces on writing buffers
+  " autocmd BufWritePre *.yaml,*.yml silent! %s/\s\+$//
+augroup END
+
+
+" #######################################################
+" My plugins, I'm using https://github.com/junegunn/vim-plug
+" #######################################################
 call plug#begin('~/.config/nvim/plugged')
 
 " Gruvbox theme
@@ -45,12 +197,10 @@ Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
-
 " ----------------------  gruvbox plugin ---------------------------
 let g:gruvbox_contrast_dark = 'hard'
 set background=dark
 colorscheme gruvbox
-
 
 " ----------------------  ALE plugin options ---------------------------
 " Enable completion where available.
@@ -65,7 +215,6 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_filetype_changed = 1
 let g:ale_fix_on_save = 1
-
 
 " ---------------------- vim-ariline  plugin options ---------------------------
 " see :h airline
@@ -91,7 +240,6 @@ let g:airline#extensions#ale#enabled = 0
 " Disable airline on FocusLost autocommand (e.g. when Vim loses focus): >
 let g:airline_focuslost_inactive = 1
 
-
 " ---------------------- ctril-p  plugin options ---------------------------
 " See :h ctrlp-options
 let g:ctrlp_switch_buffer = 'Et'
@@ -101,7 +249,6 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_line_prefix = '> '
 let g:ctrlp_by_filename = 0
-
 
 " ---------------------- Fern  plugin options ---------------------------
 " Copy most of this from https://github.com/nickjj/dotfiles
@@ -152,3 +299,35 @@ augroup FernGroup
   autocmd!
   autocmd FileType fern call FernInit()
 augroup END
+
+" #######################################################
+
+
+" #######################################################
+" Testing code
+" #######################################################
+
+function! Toggle_hotkey()
+    for i in range(1, bufnr('$'))
+        let bnum = bufnr(i)
+        let bname = bufname(i)
+        echo bnum
+        echo bname
+        " if match(bname,"hotkeys") != '-1'
+        "     echo "Found it"
+        "     echo bname
+        " endif
+    endfor
+endfunction
+
+function! Test()
+    for i in range(1, bufnr('$'))
+        let bnum = bufnr(i)
+        let bname = bufname(i)
+        echom bname
+        echom bufwinnr("defaults")
+    endfor
+endfunction
+
+
+
