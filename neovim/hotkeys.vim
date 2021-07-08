@@ -1,5 +1,8 @@
 HotKeys:
 
 <leader> h - k    : show hotkeys
-<leader> t        : open file tree
-<leader> t - c    : close file tree
+<leader> t        : toggle fern tree
+<leader> t - f    : Telescope find_files
+<leader> t - g    : Telescope live_grep
+<leader> t - b    : Telescope buffers
+<leader> t - h    : Telescope help_tags
