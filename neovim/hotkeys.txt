@@ -1,0 +1,17 @@
+HotKeys:
+<leader>    : <Space>
+hk          : show hotkeys
+
+p           : Prettier
+t           : toggle fern tree
+
+tf          : Telescope find_files
+tr          : Telescope live_grep
+tb          : Telescope buffers
+th          : Telescope help_tags
+
+ghn         : GitGutter next hunk
+ghp         : GitGutter previous hunk
+ghs         : GitGutter stage hunk under cursor
+
+<C-n>       : escape insert mode on term
