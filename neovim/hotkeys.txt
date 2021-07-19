@@ -1,17 +1,30 @@
 HotKeys:
 <leader>    : <Space>
 hk          : show hotkeys
+<C-n>       : escape insert mode on term
 
-p           : Prettier
-t           : toggle fern tree
-
+Telescope
 tf          : Telescope find_files
 tr          : Telescope live_grep
 tb          : Telescope buffers
 th          : Telescope help_tags
 
-ghn         : GitGutter next hunk
-ghp         : GitGutter previous hunk
-ghs         : GitGutter stage hunk under cursor
+Prettier
+p           : Prettier
+t           : toggle fern tree
 
-<C-n>       : escape insert mode on term
+Fern
+n           : <Plug>(fern-action-new-path)
+d           : <Plug>(fern-action-remove)
+m           : <Plug>(fern-action-move)
+M           : <Plug>(fern-action-rename)
+h           : <Plug>(fern-action-hidden-toggle)
+r           : <Plug>(fern-action-reload)
+
+GitGutter
+ghn         : <Plug>(GitGutterNextHunk)
+ghp         : <Plug>(GitGutterPreviousHunk)
+ghs         : <Plug>(GitGutterStageHunk)
+
+Coc
+cd          : coc-definition

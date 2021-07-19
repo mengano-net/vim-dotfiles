@@ -103,10 +103,10 @@ nnoremap <TAB> :bnext<CR>
 nnoremap <S-TAB> :bprevious<CR>
 
 " Use alt + hjkl to resize windows
-" nnoremap <A-j>    :resize -2<CR>
-" nnoremap <A-k>    :resize +2<CR>
-" nnoremap <A-h>    :vertical resize -2<CR>
-" nnoremap <A-l>    :vertical resize +2<CR>
+nnoremap <A-j>    :resize -5<CR>
+nnoremap <A-k>    :resize +5<CR>
+nnoremap <A-h>    :vertical resize -5<CR>
+nnoremap <A-l>    :vertical resize +5<CR>
 
 " Alternative ESC with quick jk convo
 inoremap jk <Esc>
@@ -179,9 +179,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
-
-" ctrl-p fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Fern tree browser
 Plug 'lambdalisue/fern.vim'

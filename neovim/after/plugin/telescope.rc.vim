@@ -9,7 +9,7 @@ lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup  {
     defaults = {
-        prompt_prefix = "$ ",
+        prompt_prefix = "Grep: ",
         initial_mode = "insert",
         layout_strategy = "vertical",
         mappings = {
@@ -21,7 +21,7 @@ require('telescope').setup  {
             # 'shorten',
             'absolute',
         },
-        winblend = 5,
+        winblend = 0,
     }
 }
 EOF
