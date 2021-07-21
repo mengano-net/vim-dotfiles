@@ -125,9 +125,6 @@ vnoremap > >gv
 " Open the hotkeys help file in a non editable vertical split
 nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.txt <Bar> :vertical resize -15 <Bar> :setlocal nomodifiable<CR>
 
-" Enter :Config in normal mode to edit vim's configuration
-command! Config execute ":e ~/.config/nvim/init.vim"
-
 " Enter :Reload to apply latest vim configuration
 command! Reload execute "source ~/.config/nvim/init.vim"
 
