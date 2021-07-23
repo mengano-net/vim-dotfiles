@@ -9,9 +9,9 @@ tf          : Telescope find_files
 tr          : Telescope live_grep
 tb          : Telescope buffers
 th          : Telescope help_tags
-tgf         : Telescope git_files
-tch         : Telescope command_history
-tjl         : Telescope jumplist
+gf          : Telescope git_files
+ch          : Telescope command_history
+jl          : Telescope jumplist
 
 Prettier
 p           : Prettier

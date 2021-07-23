@@ -123,7 +123,13 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Open the hotkeys help file in a non editable vertical split
-nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.txt <Bar> :vertical resize -15 <Bar> :setlocal nomodifiable<CR>
+nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.txt <Bar>
+    \:vertical resize -15 <Bar>
+    \:setlocal nomodifiable <Bar>
+    \:redraw! <Bar>
+    \:5sleep <Bar>
+    \:bd
+    \<CR>
 
 " Enter :Reload to apply latest vim configuration
 command! Reload execute "source ~/.config/nvim/init.vim"
@@ -134,6 +140,10 @@ nmap <leader>t :split term://zsh <Bar> :setlocal modifiable<CR>
 " With nvim's terminal, once you get into 'insert' mode, the escape sequence
 " is weird, so I'm making it easier
 tnoremap <Esc> <C-\><C-n>
+
+" Open quickfix window at the bottom with size 20.
+nmap <leader>qf <cmd> copen 20<CR>
+
 
 " #######################################################
 
