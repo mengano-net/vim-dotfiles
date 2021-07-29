@@ -144,6 +144,17 @@ tnoremap <Esc> <C-\><C-n>
 " Open quickfix window at the bottom with size 20.
 nmap <leader>qf <cmd> copen 20<CR>
 
+" Press * to search word under cursor, then hit map below for search/replace.
+nnoremap <leader>r :%s///g<left><left>
+" Same as above but with confirmation
+nnoremap <leader>rc :%s///gc<left><left><left>
+
+" Search/replace on a visual block. You can do that by pressing *
+" then visually selecting a block, then hit map below.
+xnoremap <leader>r :s///g<left><left>
+" Same as bove but with confirmation
+xnoremap <leader>rc :s///gc<left><left><left>
+
 
 " #######################################################
 
@@ -226,6 +237,9 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Coc, use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Clear search highlight with cursor move
+Plug 'haya14busa/is.vim'
 
 call plug#end()
 

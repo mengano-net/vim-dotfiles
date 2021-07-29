@@ -3,7 +3,7 @@ nnoremap <leader>tr <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>gf <cmd>lua require('telescope.builtin').git_files()<CR>
-nnoremap <leader>tch <cmd>lua require('telescope.builtin').command_history()<CR>
+nnoremap <leader>ch <cmd>lua require('telescope.builtin').command_history()<CR>
 nnoremap <leader>jl <cmd>lua require('telescope.builtin').jumplist()<CR>
 
 " Custom telescope find file to bring up nvim's configuration files.
