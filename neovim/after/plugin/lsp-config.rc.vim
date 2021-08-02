@@ -1,3 +1,10 @@
+" Before executing lua files, this sections is for vim commands,
+" this can ported to lua commannds, when I do that eventually ...
+
+" set color red for the errors
+hi LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
+
+" After this line, it must all be lua language
 lua << EOF
 
 -- enabling menu completion option for vim, LSP won't work wiohtout it
