@@ -1,4 +1,3 @@
-" #######################################################
 " My own set of 'basic' settings
 " #######################################################
 
@@ -123,10 +122,13 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Open the hotkeys help file in a non editable vertical split
-nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.txt <Bar> :vertical resize -15 <Bar> :setlocal nomodifiable<CR>
-
-" Enter :Config in normal mode to edit vim's configuration
-command! Config execute ":e ~/.config/nvim/init.vim"
+nmap <leader>hk :vsplit ~/.config/nvim/hotkeys.txt <Bar>
+    \:vertical resize -15 <Bar>
+    \:setlocal nomodifiable <Bar>
+    \:redraw! <Bar>
+    \:5sleep <Bar>
+    \:bd
+    \<CR>
 
 " Enter :Reload to apply latest vim configuration
 command! Reload execute "source ~/.config/nvim/init.vim"
@@ -137,6 +139,21 @@ nmap <leader>t :split term://zsh <Bar> :setlocal modifiable<CR>
 " With nvim's terminal, once you get into 'insert' mode, the escape sequence
 " is weird, so I'm making it easier
 tnoremap <Esc> <C-\><C-n>
+
+" Open quickfix window at the bottom with size 20.
+nmap <leader>qf <cmd> copen 20<CR>
+
+" Press * to search word under cursor, then hit map below for search/replace.
+nnoremap <leader>r :%s///g<left><left>
+" Same as above but with confirmation
+nnoremap <leader>rc :%s///gc<left><left><left>
+
+" Search/replace on a visual block. You can do that by pressing *
+" then visually selecting a block, then hit map below.
+xnoremap <leader>r :s///g<left><left>
+" Same as bove but with confirmation
+xnoremap <leader>rc :s///gc<left><left><left>
+
 
 " #######################################################
 
@@ -217,8 +234,14 @@ Plug 'cohama/lexima.vim'
 " Formatter
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-" Coc, use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Clear search highlight with cursor move
+Plug 'haya14busa/is.vim'
+
+" Nvim's built-in LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 
 call plug#end()
 

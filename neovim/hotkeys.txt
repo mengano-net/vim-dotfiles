@@ -2,16 +2,19 @@ HotKeys:
 <leader>    : <Space>
 hk          : show hotkeys
 <C-n>       : escape insert mode on term
+t           : toggle fern tree
 
 Telescope
 tf          : Telescope find_files
 tr          : Telescope live_grep
 tb          : Telescope buffers
 th          : Telescope help_tags
+gf          : Telescope git_files
+ch          : Telescope command_history
+jl          : Telescope jumplist
 
 Prettier
 p           : Prettier
-t           : toggle fern tree
 
 Fern
 n           : <Plug>(fern-action-new-path)
