@@ -1,4 +1,3 @@
-" #######################################################
 " My own set of 'basic' settings
 " #######################################################
 
@@ -235,8 +234,14 @@ Plug 'cohama/lexima.vim'
 " Formatter
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-" Coc, use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Clear search highlight with cursor move
+Plug 'haya14busa/is.vim'
+
+" Nvim's built-in LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 
 " Clear search highlight with cursor move
 Plug 'haya14busa/is.vim'
