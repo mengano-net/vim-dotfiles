@@ -1,83 +1,150 @@
-" Before executing lua files, this sections is for vim commands,
-" this can ported to lua commannds, when I do that eventually ...
 
-" set color red for the errors
-hi LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
+if has('mac')
+    " echo 'macos'
+    nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files({
+        \ prompt_title          = "\\ Find Files /",
+        \ layout_config         = {
+            \ width = 0.9,
+        \ },
+        \ cwd           = '~/',
+        \ follow        = 'true',
+        \ hidden        = 'false',
+        \ search_dirs   = {
+            \ '~/Desktop',
+            \ '~/Documents',
+            \ '~/Downloads',
+            \ '~/bin',
+            \ '~/stretto-repos',
+        \},
+    \})<CR>
+elseif has('linux')
+    " Linux OS
+    nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files({
+        \ prompt_title          = "\\ Find Files /",
+        \ layout_config         = {
+            \ width = 0.9,
+        \ },
+        \ cwd           = '~/',
+        \ follow        = 'true',
+        \ hidden        = 'false',
+        \ search_dirs   = {
+            \ '~/',
+            \ '~/bin',
+        \},
+    \})<CR>
+else
+    nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files()
+endif
 
-" After this line, it must all be lua language
+nnoremap <leader>tr <cmd>lua require('telescope.builtin').live_grep({
+    \ prompt_title          = "\\ Grepping for? /",
+    \ layout_config         = {
+        \ width = 0.9,
+    \ },
+    \ path_display = shorten,
+\})<CR>
+" Similar to previous map but it allows to filter the search to only
+" those relating to the string you first set on "Rg> " prompt
+" Thus, it's a grep, within a grep
+nnoremap <leader>tg <cmd>lua require('telescope.builtin').grep_string({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ },
+    \ path_display = shorten,
+    \ search = vim.fn.input('Rg> '),
+\})<CR>
+nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+nnoremap <leader>tk <cmd>lua require('telescope.builtin').keymaps({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+
+nnoremap <leader>gf <cmd>lua require('telescope.builtin').git_files()<CR>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<CR>
+nnoremap <leader>ch <cmd>lua require('telescope.builtin').command_history()<CR>
+nnoremap <leader>jl <cmd>lua require('telescope.builtin').jumplist()<CR>
+
+" Custom telescope find file to bring up nvim's configuration files.
+nnoremap <leader>nc <cmd>lua require('telescope.builtin').find_files({
+    \ prompt_title          = "\\ NVim Config /",
+    \ prompt_title          = "\\ NVim Config /",
+    \ previewer             = false,
+    \ cwd                   = "~/.config/nvim",
+    \ file_ignore_patterns  = {
+        \ "undodir/*",
+        \ "plugged/*",
+    \ },
+    \ layout_config         = {
+        \ width = 0.7,
+    \ }
+\})<CR>
+
+
 lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup  {
+    defaults = {
+        prompt_prefix = "> ",
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+        layout_config = {
+            horizontal = {
+                width_padding = 0.04,
+                height_padding = 0.1,
+                preview_width = 0.6,
+                width = 0.9,
+            },
+            vertical = {
+                width_padding = 0.05,
+                height_padding = 1,
+                preview_width = 0.5,
+            },
+        },
+        --layout_config.prompt_position = "top",
+        --layout_strategy = "horizontal",
+        --previewer = false,
+        -- User Telescope's defaults fuzzy file sorter(ships with it)
+        file_sorter = require('telescope.sorters').get_fzy_sorter,
 
--- enabling menu completion option for vim, LSP won't work wiohtout it
--- this can also be added as a vim directive with:
--- set completeopt=menuone,noselect
-vim.o.completeopt = "menuone,noselect"
-vim.lsp.set_log_level('debug')
+        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
+        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
+        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
-local nvim_lsp = require('lspconfig')
-
-require'lspconfig'.pyright.setup {
-    cmd = { '/usr/local/bin/pyright', '--stdio' },
-    filetypes = { 'python' }
-}
-
-require'lspconfig'.vimls.setup {
-    filetypes = { 'vim' },
-    initializationOptions = {
-        isNeovim = {'true'}
+        winblend = 0,
+        mappings = {
+            n = {
+                ["q"] = actions.close
+            },
+            i = {
+                ["<C-q>"] = actions.send_to_qflist,
+                ["<Esc>"] = actions.close,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-j>"] = actions.move_selection_next,
+            },
+        },
+        path_display = {
+            -- shorten pathnames with a number of characters speficied
+            --shorten = 15,
+            'absolute',
+        },
     },
-}
-
-local on_attach = function(client, bufnr)
-    require('completion').on_attach()
-
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings
-    local opts = { noremap=true, silent=true }
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-    -- Set some keybinds conditional on server capabilities
-    if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    end
-  end
-
-  --local servers = {'pyright', 'gopls', 'rust_analyzer', 'solargraph'}
-  local servers = {'pyright', 'yamlls', 'vimls'}
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-        flags = {
-          debounce_text_changes = 500,
+    extensions = {
+        -- use the native fuzzy sorter that ships with Telescope
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
         }
     }
-  end
-
-  require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true
-    },
-  }
-
-
-
+}
 EOF
