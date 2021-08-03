@@ -1,15 +1,50 @@
-nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files()<CR>
-nnoremap <leader>tr <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>tf <cmd>lua require('telescope.builtin').find_files({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ },
+    \ cwd           = '~/',
+\})<CR>
+nnoremap <leader>tr <cmd>lua require('telescope.builtin').live_grep({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ },
+    \ path_display = shorten,
+\})<CR>
+" Similar to previous map but it allows to filter the search to only
+" those relating to the string you first set on "Rg> " prompt
+" Thus, it's a grep, within a grep
+nnoremap <leader>tg <cmd>lua require('telescope.builtin').grep_string({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ },
+    \ path_display = shorten,
+    \ search = vim.fn.input('Rg> '),
+\})<CR>
 nnoremap <leader>tb <cmd>lua require('telescope.builtin').buffers()<CR>
-nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>th <cmd>lua require('telescope.builtin').help_tags({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+nnoremap <leader>tc <cmd>lua require('telescope.builtin').commands({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+nnoremap <leader>tk <cmd>lua require('telescope.builtin').keymaps({
+    \ layout_config         = {
+        \ width = 0.9,
+    \ }
+\})<CR>
+
 nnoremap <leader>gf <cmd>lua require('telescope.builtin').git_files()<CR>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<CR>
 nnoremap <leader>ch <cmd>lua require('telescope.builtin').command_history()<CR>
 nnoremap <leader>jl <cmd>lua require('telescope.builtin').jumplist()<CR>
 
 " Custom telescope find file to bring up nvim's configuration files.
-nnoremap <leader>vrc <cmd>lua require('telescope.builtin').find_files({
-    \ prompt_title          = "<Vim RC>",
+nnoremap <leader>nc <cmd>lua require('telescope.builtin').find_files({
+    \ prompt_title          = "<NVim Config>",
     \ previewer             = false,
     \ cwd                   = "~/.config/nvim",
     \ file_ignore_patterns  = {
