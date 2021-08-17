@@ -1,6 +1,6 @@
 # vim-dotfiles
-My vim configuration is working but deprecated, I have moved to using Neovim, for which I also have
-some dotfiles for, on this same repo, under the `neovim` directory.
+- My vim configuration is working but deprecated
+- I have moved to using Neovim, which I also have dotfiles for, under the `neovim` directory.
 
 ### Configuration, plugins, dot files that I use to setup my vim 
 
@@ -11,10 +11,11 @@ It must have the +conceal option compiled, this is needed for one of the
 plugins I'm using (keep reading) 
 
 ## Installation
-- I use vim plugins, so the first step is to install a plug-in manager, there are several 
-plug-in managers; I've chosen to use [this one](https://github.com/junegunn/vim-plug)
+- I use vim plugins, so the first step is to install a plug-in manager, there are several.
+- I've chosen to use [vim-plug](https://github.com/junegunn/vim-plug). Read
+documentation there please for some general information about this wonderful plug-in manager.
 - create directory `~/.vim`
 - copy `~/.vim/mappings.vim` into the same location in your local filesystem.
 - copy `~/.vimrc` into the same location in your filesystem.
-- launch vim, the issue command `:PlugIntall`, this a command from vim-plug
+- launch vim, then issue command `:PlugIntall` to install all plug-ins. 
  

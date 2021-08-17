@@ -9,7 +9,9 @@ iTerm  3.4.8 and Alacritty.
 - There are many but I'm using this plug-in manager: https://github.com/savq/paq-nvim
 
 ## Installation
-- consider this file tree
+- consider this file tree on your `$HOME` directory:
+
+```
 [.config/nvim]$ tree
 .
 ├── init.lua
@@ -21,10 +23,11 @@ iTerm  3.4.8 and Alacritty.
 │   │   ├── telescope.lua
 │   │   └── treesitter.lua
 │   ├── utils.lua
+```
 
-- clone all files and match directory structure under ~/.config/nvim/ directory
-- download prebuilt version of Neovim or build your own (check neovim repo for information)
+- clone all files and match directory structure under `~/.config/nvim/`
+- download prebuilt binaries for Neovim or build your own (check neovim repo for information)
 - First time you lunch, you will get a lot of errors since non of the plugins are installed; so
-  first you mus tinstall them by running `:PaqInstall` on nvim's command.
+  first you must install them by running `:PaqInstall` on nvim's command.
 - restart neovim
-- familiarize yourself with all maps by issue this ocmmand on neovim's command prompt:   `:maps`
+- familiarize yourself with all maps by issuing this command on neovim's command prompt: `:maps`
