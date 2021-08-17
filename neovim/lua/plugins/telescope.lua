@@ -149,6 +149,10 @@ function M.git_branches()
     require'telescope.builtin'.git_branches(telescope_picker_opts_default)
 end
 
+function M.git_commits()
+    require'telescope.builtin'.git_commits(telescope_picker_opts_default)
+end
+
 function M.command_history()
     local opts = {
         layout_config = {

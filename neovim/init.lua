@@ -117,14 +117,14 @@ highlight LspDiagnosticsVirtualTextError guifg=Red
 highlight LspDiagnosticsUnderlineError guifg=Red
 highlight LspDiagnosticsVirtualTextWarning guifg=Yellow
 
-let g:netrw_liststyles = 4
+let g:netrw_liststyle = 3
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'              " hide dotfiles on load
 let g:netrw_banner = 0
 let g:netrw_winsize = 30                                    " width in percent
 let g:netrw_browser_split = 4                               " open in prior windoww
 let g:netrw_altv = 1                                        " open splits to the right
 let g:netrw_sort_sequence = '[\/]$,*'                       " sort directories first, files after
 let g:netrw_keepdir = 0                                     " syn current and browsing directories
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'              " hide dotfiles on load
 
 function! ToggleNetrw()
     let i = bufnr("$")
@@ -219,8 +219,10 @@ utils.map('x', '<leader>rc', ':%s///gc<left><left><left>')		-- same but with con
 
 -- Telescope maps, see lua/plugins/telescope.lua
 utils.map('n', '<leader>tf', ':lua require(\'plugins.telescope\').find_files()<cr>')
-utils.map('n', '<leader>tb', ':lua require(\'plugins.telescope\').file_browser()<cr>')
 utils.map('n', '<leader>tg', ':lua require(\'plugins.telescope\').grep_string()<cr>')
 utils.map('n', '<leader>jl', ':lua require(\'plugins.telescope\').jumplist()<cr>')
 utils.map('n', '<leader>lg', ':lua require(\'plugins.telescope\').live_grep()<cr>')
 utils.map('n', '<leader>nc', ':lua require(\'plugins.telescope\').neovim_config()<cr>')
+utils.map('n', '<leader>gf', ':lua require(\'plugins.telescope\').git_files()<cr>')
+utils.map('n', '<leader>gb', ':lua require(\'plugins.telescope\').git_branches()<cr>')
+utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<cr>')
