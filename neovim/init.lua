@@ -180,7 +180,7 @@ require "paq" {
 }
 
 ------------	maps			---------------------------------------
--- map('n', '', '<cr>')
+-- utils.map('n', '', '<cr>')
 utils.map('n', '<Tab>', ':bnext<cr>')				        -- TAB in normal mode will go to next buffer
 utils.map('n', '<S-Tab>', ':bprevious<cr>')			    -- SHIFT-TAB will go to previous buffer
 
@@ -208,6 +208,20 @@ utils.map('v', '<', '<gv')
 utils.map('v', '>', '>gv')
 utils.map('n', '<leader>qf', ':copen 20<cr>')				-- open quick fix window
 utils.map('n', '<leader>qc', ':cclose<cr>')				-- close quick fix window
+
+-- "Y" will select reainder of the line, start at surcosr, similar to "D" and "C" for deleting and replacing respectively
+utils.map('n', 'Y', 'y$')
+
+-- Keeping it centered when hitting `n` or `N` after a search
+utils.map('n', 'n', 'nzzzv')
+utils.map('n', 'N', 'Nzzzv')
+utils.map('n', 'J', 'mzJ`z')
+
+-- Undo breakpoints
+utils.map('i', ',', ',<c-g>u')
+utils.map('i', '.', '.<c-g>u')
+utils.map('i', '!', '!<c-g>u')
+utils.map('i', '?', '?<c-g>u')
 
 -- Press * to search word under cursor, then hit map below for search/replace.
 utils.map('n', '<leader>r', ':%s///g<left><left>')
