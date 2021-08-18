@@ -209,8 +209,15 @@ utils.map('v', '>', '>gv')
 utils.map('n', '<leader>qf', ':copen 20<cr>')				-- open quick fix window
 utils.map('n', '<leader>qc', ':cclose<cr>')				-- close quick fix window
 
--- "Y" will select reainder of the line, start at surcosr, similar to "D" and "C" for deleting and replacing respectively
+-- "Y" will select remainder of the line, start at cursor, 
+-- similar to "D" and "C" for deleting and replacing respectively
 utils.map('n', 'Y', 'y$')
+
+-- Moving text up/down
+utils.map('v', 'J', ':m \'>+1<cr>gv=gv')
+utils.map('v', 'K', ':m \'>-2<cr>gv=gv')
+-- utils.map('i', '<c-j>', '<esc>:m .+1<cr>')
+-- utils.map('i', '<c-k>', '<esc>:m .-2<cr>')
 
 -- Keeping it centered when hitting `n` or `N` after a search
 utils.map('n', 'n', 'nzzzv')
