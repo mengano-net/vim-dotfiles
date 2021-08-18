@@ -215,7 +215,7 @@ utils.map('n', 'Y', 'y$')
 
 -- Moving text up/down
 utils.map('v', 'J', ':m \'>+1<cr>gv=gv')
-utils.map('v', 'K', ':m \'>-2<cr>gv=gv')
+utils.map('v', 'K', ':m \'<-2<cr>gv=gv')
 -- utils.map('i', '<c-j>', '<esc>:m .+1<cr>')
 -- utils.map('i', '<c-k>', '<esc>:m .-2<cr>')
 
