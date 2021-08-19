@@ -70,6 +70,7 @@ o.shiftwidth = 4
 o.expandtab = true
 o.smartindent= true
 o.textwidth = 99
+o.updatetime=100                                        -- refreshes buffers faster
 
 -- Options that are scoped to windows
 wo.number = true
@@ -79,6 +80,7 @@ wo.wrap	= false
 wo.cul = true
 wo.cuc = true
 wo.colorcolumn = '100'
+wo.signcolumn = 'yes:1'
 
 -- Options scoped to buffers
 
@@ -163,6 +165,7 @@ require "paq" {
     'tpope/vim-commentary';                     -- use 'gcc', 'gc1j' to toggle comments
     'ryanoasis/vim-devicons';                   -- devicons
     'hoob3rt/lualine.nvim';                     -- light-weight lua status line
+    'airblade/vim-gitgutter';                   -- Git gutter
 
     -- Telescope
     'nvim-lua/popup.nvim';
@@ -215,12 +218,9 @@ utils.map('n', 'Y', 'y$')
 
 -- Moving text up/down
 utils.map('v', 'J', ':m \'>+1<cr>gv=gv')
-utils.map('v', 'K', ':m \'>-2<cr>gv=gv')
+utils.map('v', 'K', ':m \'<-2<cr>gv=gv')
 -- utils.map('i', '<c-j>', '<esc>:m .+1<cr>')
 -- utils.map('i', '<c-k>', '<esc>:m .-2<cr>')
-
--- Paste last think yanked, not deleted, not system copied
-utils.map('n', '<leader>p', '"0p')
 
 -- Keeping it centered when hitting `n` or `N` after a search
 utils.map('n', 'n', 'nzzzv')
