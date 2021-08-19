@@ -219,6 +219,9 @@ utils.map('v', 'K', ':m \'>-2<cr>gv=gv')
 -- utils.map('i', '<c-j>', '<esc>:m .+1<cr>')
 -- utils.map('i', '<c-k>', '<esc>:m .-2<cr>')
 
+-- Paste last think yanked, not deleted, not system copied
+utils.map('n', '<leader>p', '"0p')
+
 -- Keeping it centered when hitting `n` or `N` after a search
 utils.map('n', 'n', 'nzzzv')
 utils.map('n', 'N', 'Nzzzv')
