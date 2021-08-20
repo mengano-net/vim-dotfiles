@@ -178,6 +178,20 @@ function M.jumplist()
     require'telescope.builtin'.jumplist(opts)
 end
 
+function M.notes()
+    local opts = {
+        prompt_title = "\\ Notes - IT /",
+        follow = 'true',
+        layout_strategy = "vertical",
+        -- layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.7,
+        },
+        cwd = '~/bitbucket.org/mine/it',
+    }
+    require'telescope.builtin'.file_browser(opts)
+end
+
 
 -- We want to be able to access utils in all our configuration files
 -- so we add the module to the _G global variable.
