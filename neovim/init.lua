@@ -48,8 +48,13 @@ o.ruler = true
 o.backup = false
 o.writebackup = false
 o.swapfile = false
-o.undofile = true
-o.undodir = '~/.config/nvim/undodir'
+
+-- These make undo persistent by saving undo lists in a file, however it g=resented
+-- problems whereby nvim would create a `~` on every directory I edited files in, thus removing
+-- them for now
+-- o.undofile = true
+-- o.undodir = '~/.config/nvim/undodir'
+
 o.pastetoggle = '<F2>'
 -- o.showtabline = 1                                    -- not needed since I'm running buftabline
 o.backspace = 'indent,eol,start'
@@ -70,7 +75,7 @@ o.shiftwidth = 4
 o.expandtab = true
 o.smartindent= true
 o.textwidth = 99
-o.updatetime=100                                        -- refreshes buffers faster
+o.updatetime = 100                                        -- refreshes buffers faster
 
 -- Options that are scoped to windows
 wo.number = true
@@ -144,6 +149,8 @@ function! ToggleNetrw()
 endfunction
 map <leader>f :call ToggleNetrw() <CR>
 
+" Trailing whitespaces will be marked as errors, thus appear on red.
+match errorMsg /\s\+$/
 ]]
 
 
@@ -252,3 +259,4 @@ utils.map('n', '<leader>gb', ':lua require(\'plugins.telescope\').git_branches()
 utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<cr>')
 utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_history()<cr>')
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
+utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
