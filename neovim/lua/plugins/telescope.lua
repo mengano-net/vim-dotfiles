@@ -142,6 +142,13 @@ function M.live_grep()
 end
 
 function M.git_files()
+    local opts = {
+        prompt_title = "\\ Git /",
+        layout_config = {
+            width = 0.9,
+        },
+        dir_icon = '',
+    }
     require'telescope.builtin'.git_files(telescope_picker_opts_default)
 end
 
@@ -165,7 +172,7 @@ end
 function M.jumplist()
     local opts = {
         layout_config = {
-            width = 0.65,
+            width = 0.9,
         },
     }
     require'telescope.builtin'.jumplist(opts)
