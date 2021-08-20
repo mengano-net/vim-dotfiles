@@ -190,7 +190,7 @@ utils.map('n', '<S-Tab>', ':bprevious<cr>')			    -- SHIFT-TAB will go to previo
 -- <Tab> to navigate the completion menu
 utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 utils.map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
-utils.map('n', '<leader>t', ':split term://zsh<cr>')		-- Terminal on a split
+utils.map('n', '<leader>sh', ':split term://zsh<cr>')		-- Terminal on a split
 utils.map('t', '<Esc>', '<C-\\><C-n>')			        -- better escape from termina's insert mode
 utils.map('i', 'jk', '<Esc>')					            -- Better way to exit insert mode
 
@@ -243,10 +243,12 @@ utils.map('x', '<leader>rc', ':%s///gc<left><left><left>')		-- same but with con
 
 -- Telescope maps, see lua/plugins/telescope.lua
 utils.map('n', '<leader>tf', ':lua require(\'plugins.telescope\').find_files()<cr>')
-utils.map('n', '<leader>tg', ':lua require(\'plugins.telescope\').grep_string()<cr>')
+utils.map('n', '<leader>gs', ':lua require(\'plugins.telescope\').grep_string()<cr>')
 utils.map('n', '<leader>jl', ':lua require(\'plugins.telescope\').jumplist()<cr>')
 utils.map('n', '<leader>lg', ':lua require(\'plugins.telescope\').live_grep()<cr>')
 utils.map('n', '<leader>nc', ':lua require(\'plugins.telescope\').neovim_config()<cr>')
 utils.map('n', '<leader>gf', ':lua require(\'plugins.telescope\').git_files()<cr>')
 utils.map('n', '<leader>gb', ':lua require(\'plugins.telescope\').git_branches()<cr>')
 utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<cr>')
+utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_history()<cr>')
+utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
