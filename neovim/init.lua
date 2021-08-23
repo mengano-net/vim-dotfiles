@@ -7,12 +7,20 @@ require'plugins.lexima'                                 -- my lexima options
 require'plugins.treesitter'                             -- my treesitter and LSP options
 require'plugins.lsp'                                    -- my treesitter and LSP options
 local utils = require'utils'                            -- my own utlities module
-require('lualine').setup {                              -- lualine plugin
+
+-- lualine plugin
+require('lualine').setup {
   options = {
-    theme = 'onedark',
+    -- theme = 'onedark',
+    theme = 'gruvbox',
     icons_enabled = true,
     -- ... your lualine config
   }
+}
+
+-- devicons
+require'nvim-web-devicons'.setup {
+    default = true;
 }
 
 ------------    Variables, requires, options, helpers    ------------------------------
@@ -22,19 +30,14 @@ local cmd 		= vim.cmd                               -- to execute Vim commands e
 local fn 		= vim.fn                                -- to call Vim functions e.g. fn.bufnr()
 local g 		= vim.g                                 -- a table to access global variables
 local o 		= vim.opt                               -- to set options with a global scope
-local wo 		= vim.wo                                -- to set options with a global scope
-local bo 		= vim.bo                                -- to set options with a global scope
+local wo 		= vim.wo                                -- to set options with a window scope
+local bo 		= vim.bo                                -- to set options with a buffer scope
 
 
 -- Global variables
 -- g.gruvbox_flat_style = 'dark'
 -- g.gruvbox_colors = { bg = "#1d2021" }				-- overwriting background color
 g.mapleader = ' '
-g.netrw_liststyles = 3
-g.netrw_banner = 0
-g.netrw_winsize = 30                                    -- width in percent
-g.netrw_browser_split = 4                               -- open in prior windoww
-g.netrw_altv = 1                                        -- open splits to the right
 
 -- Global options; these apply to all buffers
 o.smartcase = true
@@ -53,7 +56,7 @@ o.swapfile = false
 -- problems whereby nvim would create a `~` on every directory I edited files in, thus removing
 -- them for now
 -- o.undofile = true
--- o.undodir = '~/.config/nvim/undodir'
+-- o.undodir = '~/.cache/nvim/undodir'
 
 o.pastetoggle = '<F2>'
 -- o.showtabline = 1                                    -- not needed since I'm running buftabline
@@ -75,7 +78,8 @@ o.shiftwidth = 4
 o.expandtab = true
 o.smartindent= true
 o.textwidth = 99
-o.updatetime = 100                                        -- refreshes buffers faster
+o.updatetime = 100                                      -- refreshes buffers faster
+-- o.list = true                                           -- show whitespaces
 
 -- Options that are scoped to windows
 wo.number = true
@@ -151,6 +155,8 @@ map <leader>f :call ToggleNetrw() <CR>
 
 " Trailing whitespaces will be marked as errors, thus appear on red.
 match errorMsg /\s\+$/
+" match WarningMsg /\s\+$/
+" match Whitespace /\s\+$/
 ]]
 
 
@@ -170,7 +176,8 @@ require "paq" {
     'cohama/lexima.vim';                        -- Automated closing of parenthesis, etc
     'haya14busa/is.vim';                        -- Clear highlights when cursor moves
     'tpope/vim-commentary';                     -- use 'gcc', 'gc1j' to toggle comments
-    'ryanoasis/vim-devicons';                   -- devicons
+    -- 'ryanoasis/vim-devicons';                   -- devicons
+    'kyazdani42/nvim-web-devicons';             -- devicons #2 ;)
     'hoob3rt/lualine.nvim';                     -- light-weight lua status line
     'airblade/vim-gitgutter';                   -- Git gutter
 
@@ -260,3 +267,4 @@ utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<
 utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_history()<cr>')
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
 utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
+utils.map('n', '<leader>ht', ':lua require\'plugins.telescope\'.help_tags()<cr>')
