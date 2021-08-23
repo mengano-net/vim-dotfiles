@@ -81,11 +81,13 @@ function M.neovim_config()
     --     print('Cannot detect your OS')
     --     cwd = '~/.config/nvim'
     -- end
+    -- 
     local opts = {
         prompt_title = '\\ NVim Config /',
         previewer = false,
         cwd = '~/.config/nvim',
         -- cwd = cwd_neovim_config,
+        prompt_prefix = '  ',
         layout_config = {
             width = 0.5,
         },
@@ -166,12 +168,14 @@ function M.git_branches()
 end
 
 function M.git_commits()
+    -- 
     local opts = {
         layout_config = {
-            width = 0.8,
+            width = 0.7,
         },
+        prompt_prefix = '  ',
     }
-    require'telescope.builtin'.git_commits(telescope_picker_opts_default)
+    require'telescope.builtin'.git_commits(opts)
 end
 
 function M.command_history()
@@ -191,6 +195,7 @@ function M.jumplist()
             width = 0.8,
         },
         -- previewer = true,
+        prompt_prefix = '  ',
     }
     require'telescope.builtin'.jumplist(opts)
 end

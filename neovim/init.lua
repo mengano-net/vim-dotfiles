@@ -38,11 +38,6 @@ local bo 		= vim.bo                                -- to set options with a buff
 -- g.gruvbox_flat_style = 'dark'
 -- g.gruvbox_colors = { bg = "#1d2021" }				-- overwriting background color
 g.mapleader = ' '
-g.netrw_liststyles = 3
-g.netrw_banner = 0
-g.netrw_winsize = 30                                    -- width in percent
-g.netrw_browser_split = 4                               -- open in prior windoww
-g.netrw_altv = 1                                        -- open splits to the right
 
 -- Global options; these apply to all buffers
 o.smartcase = true
