@@ -4,57 +4,57 @@ local M = {}                                            -- The module to export
 
 
 -- Telescope setup
-local actions = require('telescope.actions')                                                                                                   
-require('telescope').setup  {                                                                           
-    defaults = {                                                                                        
-        prompt_prefix = "> ",                                                                           
-        initial_mode = "insert",                                                                        
-        layout_strategy = "vertical",                                                                   
-        layout_config = {                                                                               
-            horizontal = {                                                                              
-                width_padding = 0.04,                                                                   
-                height_padding = 0.1,                                                                   
-                preview_width = 0.6,                                                                    
-                width = 0.9,                                                                            
-            },                                                                                          
-            vertical = {                                                                                
-                width_padding = 0.05,                                                                   
-                height_padding = 1,                                                                     
-                preview_width = 0.5,                                                                    
-            },                                                                                          
-        },                                                                                              
-        -- User Telescope's defaults fuzzy file sorter(ships with it)                                   
-        file_sorter = require('telescope.sorters').get_fzy_sorter,                                      
-                                                                                                        
-        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,                          
-        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,                      
-        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,                       
-                                                                                                        
-        winblend = 0,                                                                                   
-        mappings = {                                                                                    
-            n = {                                                                                       
-                ["q"] = actions.close                                                                   
-            },                                                                                          
-            i = {                                                                                       
-                ["<C-q>"] = actions.send_to_qflist,                                                     
-                ["<Esc>"] = actions.close,                                                              
-                ["<C-k>"] = actions.move_selection_previous,                                            
-                ["<C-j>"] = actions.move_selection_next,                                                
-            },                                                                                          
-        },                                                                                              
-        path_display = {                                                                                
-            -- shorten pathnames with a number of characters speficied                                  
-            shorten = 15,                                                                             
-            --'absolute',                                                                                 
-        },                                                                                              
-    },                                                                                                  
-    extensions = {                                                                                      
-        -- use the native fuzzy sorter that ships with Telescope                                        
-        fzy_native = {                                                                                  
-            override_generic_sorter = false,                                                            
-            override_file_sorter = true,                                                                
-        }                                                                                               
-    }                                                                                                   
+local actions = require('telescope.actions')
+require('telescope').setup  {
+    defaults = {
+        prompt_prefix = "> ",
+        initial_mode = "insert",
+        layout_strategy = "vertical",
+        layout_config = {
+            horizontal = {
+                width_padding = 0.04,
+                height_padding = 0.1,
+                preview_width = 0.6,
+                width = 0.9,
+            },
+            vertical = {
+                width_padding = 0.05,
+                height_padding = 1,
+                preview_width = 0.5,
+            },
+        },
+        -- User Telescope's defaults fuzzy file sorter(ships with it)
+        file_sorter = require('telescope.sorters').get_fzy_sorter,
+
+        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
+        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
+        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+
+        winblend = 0,
+        mappings = {
+            n = {
+                ["q"] = actions.close
+            },
+            i = {
+                ["<C-q>"] = actions.send_to_qflist,
+                ["<Esc>"] = actions.close,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-j>"] = actions.move_selection_next,
+            },
+        },
+        path_display = {
+            -- shorten pathnames with a number of characters speficied
+            shorten = 15,
+            --'absolute',
+        },
+    },
+    extensions = {
+        -- use the native fuzzy sorter that ships with Telescope
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
+    }
 }
 
 
@@ -67,7 +67,7 @@ local telescope_picker_opts_default = {
         -- shorten pathnames with a number of characters speficied
         shorten = 15,
         --'absolute',
-    },                                                                                              
+    },
 }
 
 function M.neovim_config()
@@ -112,7 +112,7 @@ function M.file_browser()
         prompt_title = "\\ Files Browser/",
         follow = 'true',
         hidden = 'false',
-        layout_strategy = "vertical",                                                                   
+        layout_strategy = "vertical",
         layout_config = {
             width = 0.9,
         },
@@ -147,7 +147,7 @@ function M.git_files()
         layout_config = {
             width = 0.9,
         },
-        dir_icon = '',
+        -- dir_icon = '',
     }
     require'telescope.builtin'.git_files(telescope_picker_opts_default)
 end
@@ -174,6 +174,7 @@ function M.jumplist()
         layout_config = {
             width = 0.9,
         },
+        -- previewer = true,
     }
     require'telescope.builtin'.jumplist(opts)
 end

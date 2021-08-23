@@ -9,7 +9,8 @@ require'plugins.lsp'                                    -- my treesitter and LSP
 local utils = require'utils'                            -- my own utlities module
 require('lualine').setup {                              -- lualine plugin
   options = {
-    theme = 'onedark',
+    -- theme = 'onedark',
+    theme = 'gruvbox',
     icons_enabled = true,
     -- ... your lualine config
   }
@@ -22,8 +23,8 @@ local cmd 		= vim.cmd                               -- to execute Vim commands e
 local fn 		= vim.fn                                -- to call Vim functions e.g. fn.bufnr()
 local g 		= vim.g                                 -- a table to access global variables
 local o 		= vim.opt                               -- to set options with a global scope
-local wo 		= vim.wo                                -- to set options with a global scope
-local bo 		= vim.bo                                -- to set options with a global scope
+local wo 		= vim.wo                                -- to set options with a window scope
+local bo 		= vim.bo                                -- to set options with a buffer scope
 
 
 -- Global variables
@@ -53,7 +54,7 @@ o.swapfile = false
 -- problems whereby nvim would create a `~` on every directory I edited files in, thus removing
 -- them for now
 -- o.undofile = true
--- o.undodir = '~/.config/nvim/undodir'
+-- o.undodir = '~/.cache/nvim/undodir'
 
 o.pastetoggle = '<F2>'
 -- o.showtabline = 1                                    -- not needed since I'm running buftabline
@@ -75,7 +76,8 @@ o.shiftwidth = 4
 o.expandtab = true
 o.smartindent= true
 o.textwidth = 99
-o.updatetime = 100                                        -- refreshes buffers faster
+o.updatetime = 100                                      -- refreshes buffers faster
+-- o.list = true                                           -- show whitespaces
 
 -- Options that are scoped to windows
 wo.number = true
@@ -151,6 +153,8 @@ map <leader>f :call ToggleNetrw() <CR>
 
 " Trailing whitespaces will be marked as errors, thus appear on red.
 match errorMsg /\s\+$/
+" match WarningMsg /\s\+$/
+" match Whitespace /\s\+$/
 ]]
 
 
