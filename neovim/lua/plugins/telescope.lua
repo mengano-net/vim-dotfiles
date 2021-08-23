@@ -64,7 +64,7 @@ local telescope_picker_opts_default = {
         width = 0.9,
     },
     path_display = {
-        -- shorten pathnames with a number of characters speficied
+       -- shorten pathnames with a number of characters speficied
         shorten = 15,
         --'absolute',
     },
@@ -143,28 +143,44 @@ end
 
 function M.git_files()
     local opts = {
-        prompt_title = "\\ Git /",
+        prompt_title = "\\ Git Files /",
+        -- layout_strategy = "horizontal",
         layout_config = {
-            width = 0.9,
+            width = 0.7,
         },
-        -- dir_icon = '',
+        prompt_prefix = '  ',
     }
-    require'telescope.builtin'.git_files(telescope_picker_opts_default)
+    require'telescope.builtin'.git_files(opts)
 end
 
 function M.git_branches()
-    require'telescope.builtin'.git_branches(telescope_picker_opts_default)
+    local opts = {
+        prompt_title = "\\ Git Branches /",
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = 0.9,
+        },
+        prompt_prefix = '  ',
+    }
+    require'telescope.builtin'.git_branches(opts)
 end
 
 function M.git_commits()
+    local opts = {
+        layout_config = {
+            width = 0.8,
+        },
+    }
     require'telescope.builtin'.git_commits(telescope_picker_opts_default)
 end
 
 function M.command_history()
     local opts = {
+        prompt_title = "\\ Command History /",
         layout_config = {
             width = 0.5,
         },
+        prompt_prefix = ' גּ  ',
     }
     require'telescope.builtin'.command_history(opts)
 end
@@ -172,7 +188,7 @@ end
 function M.jumplist()
     local opts = {
         layout_config = {
-            width = 0.9,
+            width = 0.8,
         },
         -- previewer = true,
     }
@@ -182,17 +198,27 @@ end
 function M.notes()
     local opts = {
         prompt_title = "\\ Notes - IT /",
-        follow = 'true',
-        layout_strategy = "vertical",
-        -- layout_strategy = "horizontal",
+        layout_strategy = "horizontal",
         layout_config = {
-            width = 0.7,
+            preview_width = 0.65,
         },
         cwd = '~/bitbucket.org/mine/it',
+        prompt_prefix = '   ',
     }
     require'telescope.builtin'.file_browser(opts)
 end
 
+function M.help_tags()
+    local opts = {
+        layout_strategy = "horizontal",
+        layout_config = {
+            preview_width = 0.65,
+        },
+        prompt_prefix = '   ',
+        prompt_title = '\\ Help Tags /',
+    }
+    require'telescope.builtin'.help_tags(opts)
+end
 
 -- We want to be able to access utils in all our configuration files
 -- so we add the module to the _G global variable.

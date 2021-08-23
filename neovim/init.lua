@@ -7,13 +7,20 @@ require'plugins.lexima'                                 -- my lexima options
 require'plugins.treesitter'                             -- my treesitter and LSP options
 require'plugins.lsp'                                    -- my treesitter and LSP options
 local utils = require'utils'                            -- my own utlities module
-require('lualine').setup {                              -- lualine plugin
+
+-- lualine plugin
+require('lualine').setup {
   options = {
     -- theme = 'onedark',
     theme = 'gruvbox',
     icons_enabled = true,
     -- ... your lualine config
   }
+}
+
+-- devicons
+require'nvim-web-devicons'.setup {
+    default = true;
 }
 
 ------------    Variables, requires, options, helpers    ------------------------------
@@ -174,7 +181,8 @@ require "paq" {
     'cohama/lexima.vim';                        -- Automated closing of parenthesis, etc
     'haya14busa/is.vim';                        -- Clear highlights when cursor moves
     'tpope/vim-commentary';                     -- use 'gcc', 'gc1j' to toggle comments
-    'ryanoasis/vim-devicons';                   -- devicons
+    -- 'ryanoasis/vim-devicons';                   -- devicons
+    'kyazdani42/nvim-web-devicons';             -- devicons #2 ;)
     'hoob3rt/lualine.nvim';                     -- light-weight lua status line
     'airblade/vim-gitgutter';                   -- Git gutter
 
@@ -264,3 +272,4 @@ utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<
 utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_history()<cr>')
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
 utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
+utils.map('n', '<leader>ht', ':lua require\'plugins.telescope\'.help_tags()<cr>')
