@@ -136,6 +136,7 @@ end
 function M.live_grep()
     local opts = {
         prompt_title = "\\ Live Grep /",
+        layout_strategy = "horizontal",
         layout_config = {
             width = 0.9,
         },

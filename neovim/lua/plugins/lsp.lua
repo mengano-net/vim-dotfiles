@@ -25,11 +25,20 @@ nvim_lsp.pyright.setup {
     cmd = { '/usr/bin/pyright', '--stdio' },
     filetypes = { 'python' }
 }
+
+
+nvim_lsp.bashls.setup {
+    filetypes = { 'sh', 'zsh' }
+}
+
+nvim_lsp.vimls.setup {}
+
 -- turning off until IO figure out how to disable all those error that pop up on yaml
 -- nvim_lsp.yamlls.setup{}
 
+
 -- local servers = {'pyright', 'yamlls', 'vimls'}
-local servers = { 'pyright', 'vimls' }
+local servers = { 'pyright', 'vimls', 'bashls' }
     for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
     on_attach = on_attach,
