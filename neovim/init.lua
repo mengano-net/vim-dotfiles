@@ -166,9 +166,9 @@ require "paq" {
     'savq/paq-nvim';                            -- Let Paq manage itself
 
     -- Color Schemes
-    'morhetz/gruvbox';                          -- gruxbox colorscheme
-    'eddyekofo94/gruvbox-flat.nvim';            -- An nvim colorscheme base on gruvbox
-    'navarasu/onedark.nvim';
+    -- 'morhetz/gruvbox';                          -- gruxbox colorscheme
+    -- 'eddyekofo94/gruvbox-flat.nvim';            -- An nvim colorscheme base on gruvbox
+    -- 'navarasu/onedark.nvim';
     'lifepillar/vim-gruvbox8';
 
     'ap/vim-buftabline';                        -- show buffers on tabline
@@ -176,10 +176,10 @@ require "paq" {
     'cohama/lexima.vim';                        -- Automated closing of parenthesis, etc
     'haya14busa/is.vim';                        -- Clear highlights when cursor moves
     'tpope/vim-commentary';                     -- use 'gcc', 'gc1j' to toggle comments
-    -- 'ryanoasis/vim-devicons';                   -- devicons
-    'kyazdani42/nvim-web-devicons';             -- devicons #2 ;)
+    'kyazdani42/nvim-web-devicons';             -- devicons
     'hoob3rt/lualine.nvim';                     -- light-weight lua status line
     'airblade/vim-gitgutter';                   -- Git gutter
+    '9mm/vim-closer';                           -- better automatic closing of parenths, etc
 
     -- Telescope
     'nvim-lua/popup.nvim';
@@ -189,11 +189,10 @@ require "paq" {
 
     -- Built into neovim now, LSP client
     'neovim/nvim-lspconfig';
-    'kabouzeid/nvim-lspinstall';
     'nvim-lua/completion-nvim';
+    'kabouzeid/nvim-lspinstall';
 
     'nvim-treesitter/nvim-treesitter';          -- treesitter
-    --"hrsh7th/nvim-compe";
 }
 
 ------------	maps			---------------------------------------
@@ -268,3 +267,4 @@ utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_histor
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
 utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
 utils.map('n', '<leader>ht', ':lua require\'plugins.telescope\'.help_tags()<cr>')
+utils.map('n', '<leader>p', ':lua vim.lsp.buf.formatting()<cr>')
