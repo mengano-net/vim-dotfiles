@@ -2,6 +2,7 @@
 
 vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 local nvim_lsp = require'lspconfig'
+local protocol = require'vim.lsp.protocol'
 local opts = { noremap=true, silent=true }
 
 
@@ -15,8 +16,10 @@ local on_attach = function(client, bufnr)
 
     -- Mappings
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.declaration()<CR>', opts)
 end
+
 
 nvim_lsp.pyright.setup {
     cmd = { '/usr/bin/pyright', '--stdio' },

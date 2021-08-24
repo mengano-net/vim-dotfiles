@@ -157,6 +157,10 @@ map <leader>f :call ToggleNetrw() <CR>
 match errorMsg /\s\+$/
 " match WarningMsg /\s\+$/
 " match Whitespace /\s\+$/
+
+" No lines on terminal window, also go stright into insert mode
+au TermOpen * silent! setlocal nonumber norelativenumber
+au TermOpen * silent! startinsert
 ]]
 
 
@@ -191,6 +195,7 @@ require "paq" {
     'neovim/nvim-lspconfig';
     'nvim-lua/completion-nvim';
     'kabouzeid/nvim-lspinstall';
+    'glepnir/lspsaga.nvim';                     --  lightweigth LSP, based on nvim's LSP
 
     'nvim-treesitter/nvim-treesitter';          -- treesitter
 }
@@ -225,7 +230,7 @@ utils.map('v', '>', '>gv')
 utils.map('n', '<leader>qf', ':copen 20<cr>')				-- open quick fix window
 utils.map('n', '<leader>qc', ':cclose<cr>')				-- close quick fix window
 
--- "Y" will select remainder of the line, start at cursor, 
+-- "Y" will select remainder of the line, start at cursor,
 -- similar to "D" and "C" for deleting and replacing respectively
 utils.map('n', 'Y', 'y$')
 
