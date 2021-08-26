@@ -3,11 +3,11 @@
 vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 local nvim_lsp = require'lspconfig'
 -- local protocol = require'vim.lsp.protocol'
--- local opts = { noremap=true, silent=true }
 
---[[
-local on_attach = function(client, bufnr)
+local custom_lsp_attach = function(client, bufnr)
     require'completion'.on_attach()
+
+    local opts = { noremap=true, silent=true }
 
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -19,7 +19,6 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.declaration()<CR>', opts)
 end
-]]
 
 nvim_lsp.pyright.setup {
     cmd = { '/usr/bin/pyright', '--stdio' },
@@ -33,7 +32,21 @@ nvim_lsp.bashls.setup {
 nvim_lsp.vimls.setup {}
 
 -- turning off until IO figure out how to disable all those error that pop up on yaml
-nvim_lsp.yamlls.setup{}
+-- nvim_lsp.yamlls.setup{}
+nvim_lsp.yamlls.setup{
+    filetypes = { 'yaml', 'yml' },
+    settings = {
+        yaml = {
+            hover = true,
+            format = {
+                enable = true,
+                singleQuote = true,
+            },
+            completion = true,
+            validate = true,
+        },
+    }
+}
 
 
 -- lua-language-server
@@ -44,8 +57,8 @@ local sumneko_root_path = ""
 local sumneko_binary = ""
 
 if vim.fn.has("mac") == 1 then
-    sumneko_root_path = "/Users/" .. USER .. "/.local/bin/lua-language-server"
-    sumneko_binary = "/Users/" .. USER .. "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
+    sumneko_root_path = "/Users/" .. USER .. "/.local/lua-language-server"
+    sumneko_binary = "/Users/" .. USER .. "/.local/lua-language-server/bin/macOS/lua-language-server"
 elseif vim.fn.has("unix") == 1 then
     sumneko_root_path = "/home/" .. USER .. "/.local/lua-language-server"
     sumneko_binary = "/home/" .. USER .. "/.local/lua-language-server/bin/Linux/lua-language-server"
@@ -69,7 +82,11 @@ require'lspconfig'.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                    [vim.fn.expand('~/.config.nvim/lua')] = true,
+                }
             }
         }
     }
@@ -80,7 +97,7 @@ require'lspconfig'.sumneko_lua.setup {
 local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
     for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
-    on_attach = on_attach,
+    on_attach = custom_lsp_attach,
         flags = {
             debounce_text_changes = 150,
         }

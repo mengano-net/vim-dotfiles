@@ -204,13 +204,14 @@ require "paq" {
 -- utils.map('n', '', '<cr>')
 utils.map('n', '<Tab>', ':bnext<cr>')				        -- TAB in normal mode will go to next buffer
 utils.map('n', '<S-Tab>', ':bprevious<cr>')			    -- SHIFT-TAB will go to previous buffer
+utils.map('n', '<leader>sh', ':split term://zsh<cr>')		-- Terminal on a split
+utils.map('t', '<Esc>', '<C-\\><C-n>')			        -- better escape from termina's insert mode
+utils.map('i', 'jk', '<Esc>')					            -- Better way to exit insert mode
+utils.map('n', 'nh', ':nohl<cr>')                       -- no highhlights
 
 -- <Tab> to navigate the completion menu
 utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 utils.map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
-utils.map('n', '<leader>sh', ':split term://zsh<cr>')		-- Terminal on a split
-utils.map('t', '<Esc>', '<C-\\><C-n>')			        -- better escape from termina's insert mode
-utils.map('i', 'jk', '<Esc>')					            -- Better way to exit insert mode
 
 -- Use alt + hjkl to resize windows
 utils.map('n', '<A-j>', ':resize -5<cr>')
