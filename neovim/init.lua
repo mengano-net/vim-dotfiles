@@ -202,12 +202,13 @@ require "paq" {
 
 ------------	maps			---------------------------------------
 -- utils.map('n', '', '<cr>')
-utils.map('n', '<Tab>', ':bnext<cr>')				        -- TAB in normal mode will go to next buffer
+utils.map('n', '<Tab>', ':bnext<cr>')				    -- TAB in normal mode will go to next buffer
 utils.map('n', '<S-Tab>', ':bprevious<cr>')			    -- SHIFT-TAB will go to previous buffer
-utils.map('n', '<leader>sh', ':split term://zsh<cr>')		-- Terminal on a split
+utils.map('n', '<leader>sh', ':split term://zsh<cr>')	-- Terminal on a split
 utils.map('t', '<Esc>', '<C-\\><C-n>')			        -- better escape from termina's insert mode
-utils.map('i', 'jk', '<Esc>')					            -- Better way to exit insert mode
+utils.map('i', 'jk', '<Esc>')					        -- Better way to exit insert mode
 utils.map('n', 'nh', ':nohl<cr>')                       -- no highhlights
+utils.map('n', '<leader>p', '"0p')              -- paste last thing yanked (not system copied, not deleted)
 
 -- <Tab> to navigate the completion menu
 utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
@@ -273,4 +274,4 @@ utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_histor
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
 utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
 utils.map('n', '<leader>ht', ':lua require\'plugins.telescope\'.help_tags()<cr>')
-utils.map('n', '<leader>p', ':lua vim.lsp.buf.formatting()<cr>')
+-- utils.map('n', '<leader>p', ':lua vim.lsp.buf.formatting()<cr>')

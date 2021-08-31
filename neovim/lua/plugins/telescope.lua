@@ -126,7 +126,7 @@ end
 function M.grep_string()
     local opts = {
         layout_config = {
-            width = 0.9,
+            width = 0.7,
         },
         search = vim.fn.input('Rg> '),
     }
@@ -208,7 +208,7 @@ function M.notes()
         layout_config = {
             preview_width = 0.65,
         },
-        cwd = '~/bitbucket.org/mine/it',
+        cwd = '~/bitbucket.org/mine/it/',
         prompt_prefix = '   ',
     }
     require'telescope.builtin'.file_browser(opts)
