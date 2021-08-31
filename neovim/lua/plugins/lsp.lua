@@ -4,20 +4,25 @@ vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 local nvim_lsp = require'lspconfig'
 -- local protocol = require'vim.lsp.protocol'
 
-local custom_lsp_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
+
     require'completion'.on_attach()
-
-    local opts = { noremap=true, silent=true }
-
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+    -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings
     -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { noremap=true, silent=true }
+
     buf_set_keymap('n', 'gD', ':lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'gd', ':lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+
 end
 
 nvim_lsp.pyright.setup {
@@ -78,7 +83,7 @@ require'lspconfig'.sumneko_lua.setup {
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
+                globals = { 'vim' }
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
@@ -93,11 +98,11 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 
--- local servers = {'pyright', 'yamlls', 'vimls'}
-local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
+-- local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
+local servers = { 'pyright', 'vimls', 'bashls', }
     for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
-    on_attach = custom_lsp_attach,
+    on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
         }
