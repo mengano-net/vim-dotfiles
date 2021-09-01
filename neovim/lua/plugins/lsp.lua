@@ -7,6 +7,7 @@ local nvim_lsp = require'lspconfig'
 local on_attach = function(client, bufnr)
 
     require'completion'.on_attach()
+    local filetype = vim.api.nvim_buf_get_option(0, "filetype")
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -22,23 +23,38 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<cr>', opts)
+    buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+    -- if filetype ~= "lua" then
+    --     buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<cr>', opts)
+    -- end
 
 end
 
 nvim_lsp.pyright.setup {
+    on_attach = on_attach,
     cmd = { '/usr/bin/pyright', '--stdio' },
     filetypes = { 'python' }
 }
 
 nvim_lsp.bashls.setup {
+    on_attach = on_attach,
     filetypes = { 'sh', 'zsh' }
 }
 
-nvim_lsp.vimls.setup {}
+nvim_lsp.vimls.setup {
+    on_attach = on_attach,
+}
 
 -- turning off until IO figure out how to disable all those error that pop up on yaml
 -- nvim_lsp.yamlls.setup{}
 nvim_lsp.yamlls.setup{
+    on_attach = on_attach,
     filetypes = { 'yaml', 'yml' },
     settings = {
         yaml = {
@@ -72,6 +88,8 @@ else
 end
 
 require'lspconfig'.sumneko_lua.setup {
+    on_attach = on_attach,
+    debounce_text_changes = 150,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     settings = {
         Lua = {
@@ -97,15 +115,16 @@ require'lspconfig'.sumneko_lua.setup {
     }
 }
 
-
--- local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
-local servers = { 'pyright', 'vimls', 'bashls', }
+local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
+-- local servers = { 'pyright', 'vimls', 'bashls', }
     for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
-    on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
         }
     }
 end
 
+return {
+    on_attach = on_attach,
+}
