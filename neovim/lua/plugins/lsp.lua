@@ -28,7 +28,13 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- buf_set_keymap('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- Set some keybinds conditional on server capabilities
+    if client.resolved_capabilities.document_formatting then
+        buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    elseif client.resolved_capabilities.document_range_formatting then
+        buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    end
 
     -- if filetype ~= "lua" then
     --     buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<cr>', opts)
@@ -39,6 +45,7 @@ end
 nvim_lsp.pyright.setup {
     on_attach = on_attach,
     cmd = { '/usr/bin/pyright', '--stdio' },
+    -- /usr/local/bin/pyright
     filetypes = { 'python' }
 }
 
@@ -49,6 +56,7 @@ nvim_lsp.bashls.setup {
 
 nvim_lsp.vimls.setup {
     on_attach = on_attach,
+    init_options = { isNeovim = true },
 }
 
 -- turning off until IO figure out how to disable all those error that pop up on yaml
@@ -66,6 +74,7 @@ nvim_lsp.yamlls.setup{
             completion = true,
             validate = true,
             customTags = {
+                '!Ref',
                 -- '!Equals sequence',
                 -- 'FindInMap sequence',
                 -- '!GetAtt scalar',
@@ -75,7 +84,7 @@ nvim_lsp.yamlls.setup{
                 -- '!Ref scalar"',
                 -- '!Select sequence',
                 -- '!Split sequence',
-                '!Sub scalar',
+                -- '!Sub scalar',
                 -- '!Sub sequence',
                 -- '!And sequence',
                 -- '!Not sequence',
