@@ -63,6 +63,7 @@ nvim_lsp.vimls.setup {
 -- nvim_lsp.yamlls.setup{}
 nvim_lsp.yamlls.setup{
     on_attach = on_attach,
+    debounce_text_changes = 150,
     filetypes = { 'yaml', 'yml' },
     settings = {
         yaml = {
@@ -73,15 +74,20 @@ nvim_lsp.yamlls.setup{
             },
             completion = true,
             validate = true,
-            customTags = { '!Ref', '!ImportValue' },
-            schemas = {
-                'https://raw.githubusercontent.com/awslabs/goformation/v4.18.2/schema/cloudformation.schema.json: "/*"',
-            },
-            schemaStore = {
-                enable = true,
+            customTags = {
+                '!Ref',
+                '!ImportValue',
+                '!Sub',
+                '!GetAtt',
+                '!GetAZs',
+                '!Join sequence',
+                '!Equals sequence',
+                '!FindInMap sequence',
+                '!Select sequence',
+                '!Split sequence',
             },
         },
-    }
+    },
 }
 
 
@@ -129,16 +135,6 @@ require'lspconfig'.sumneko_lua.setup {
         }
     }
 }
-
-local servers = { 'pyright', 'vimls', 'bashls', 'yamlls' }
--- local servers = { 'pyright', 'vimls', 'bashls', }
-    for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        flags = {
-            debounce_text_changes = 150,
-        }
-    }
-end
 
 return {
     on_attach = on_attach,
