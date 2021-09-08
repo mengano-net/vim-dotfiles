@@ -2,17 +2,58 @@
 
 vim.opt.completeopt = {'menuone', 'noinsert', 'noselect'}
 local nvim_lsp = require'lspconfig'
--- local protocol = require'vim.lsp.protocol'
+local protocol = require'vim.lsp.protocol'
 
 local on_attach = function(client, bufnr)
 
     require'completion'.on_attach()
-    local filetype = vim.api.nvim_buf_get_option(0, "filetype")
+    -- local filetype = vim.api.nvim_buf_get_option(0, "filetype")
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- custom icon
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+            underline = true,
+            -- This sets the spacing and the prefix, obviously.
+            virtual_text = {
+                spacing = 8,
+                prefix = ' '
+            }
+        }
+    )
+
+    -- Protocols
+    protocol.CompletionItemKind = {
+        '', -- Text
+        '', -- Method
+        '', -- Function
+        '', -- Constructor
+        '', -- Field
+        '', -- Variable
+        '', -- Class
+        'ﰮ', -- Interface
+        '', -- Module
+        '', -- Property
+        '', -- Unit
+        '', -- Value
+        '', -- Enum
+        '', -- Keyword
+        '﬌', -- Snippet
+        '', -- Color
+        '', -- File
+        '', -- Reference
+        '', -- Folder
+        '', -- EnumMember
+        '', -- Constant
+        '', -- Struct
+        '', -- Event
+        'ﬦ', -- Operator
+        '', -- TypeParameter
+    }
 
     -- Mappings
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -29,12 +70,21 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     -- buf_set_keymap('n', '<leader>p', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+
+    -- Format on save viz BufWritePre to run lua formatting
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        vim.api.nvim_command [[augroup Format]]
+        vim.api.nvim_command [[autocmd! * <buffer>]]
+        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+        vim.api.nvim_command [[augroup END]]
     end
+    -- if client.resolved_capabilities.document_formatting then
+    --     buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    -- elseif client.resolved_capabilities.document_range_formatting then
+    --     buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    -- end
 
     -- if filetype ~= "lua" then
     --     buf_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<cr>', opts)

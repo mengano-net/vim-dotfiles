@@ -13,7 +13,12 @@ ts.setup{
             'yaml',
             'lua',
             'shell',
+            'vim',
+            'python',
         },
     },
 }
 
+-- Found this on youtube, not sure if I will use it yet.
+-- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- parser_config.tsx.used_by = { "javascript", "typescript.tsx" }

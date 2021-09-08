@@ -14,7 +14,16 @@ require('lualine').setup {
     -- theme = 'onedark',
     theme = 'gruvbox',
     icons_enabled = true,
-    -- ... your lualine config
+    extensions = {'fugitive'},
+    lualine_x = {
+        {
+            'diagnostics',
+            sources = {"nvim_lsp"},
+            symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+        },
+        -- 'encoding',
+        'filetype',
+    },
   }
 }
 
@@ -274,4 +283,3 @@ utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_histor
 utils.map('n', '<leader>cl', ':lua require\'telescope.builtin\'.commands()<cr>')
 utils.map('n', '<leader>no', ':lua require\'plugins.telescope\'.notes()<cr>')
 utils.map('n', '<leader>ht', ':lua require\'plugins.telescope\'.help_tags()<cr>')
--- utils.map('n', '<leader>p', ':lua vim.lsp.buf.formatting()<cr>')
