@@ -160,7 +160,7 @@ function! ToggleNetrw()
         silent Lexplore
     endif
 endfunction
-map <leader>f :call ToggleNetrw() <CR>
+" map <leader>f :call ToggleNetrw() <CR>
 
 " Trailing whitespaces will be marked as errors, thus appear on red.
 match errorMsg /\s\+$/
@@ -271,7 +271,8 @@ utils.map('x', '<leader>r', ':%s///g<left><left>')
 utils.map('x', '<leader>rc', ':%s///gc<left><left><left>')		-- same but with confirmation for each change
 
 -- Telescope maps, see lua/plugins/telescope.lua
-utils.map('n', '<leader>tf', ':lua require(\'plugins.telescope\').find_files()<cr>')
+-- utils.map('n', '<leader>tf', ':lua require(\'plugins.telescope\').find_files()<cr>')
+utils.map('n', '<leader>f', ':lua require(\'plugins.telescope\').file_browser()<cr>')
 utils.map('n', '<leader>gs', ':lua require(\'plugins.telescope\').grep_string()<cr>')
 utils.map('n', '<leader>jl', ':lua require(\'plugins.telescope\').jumplist()<cr>')
 utils.map('n', '<leader>lg', ':lua require(\'plugins.telescope\').live_grep()<cr>')

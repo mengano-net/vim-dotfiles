@@ -95,6 +95,7 @@ function M.neovim_config()
     require'telescope.builtin'.find_files(opts)
 end
 
+-- Deprecated in favor of M.file_browser below
 function M.find_files()
     local opts = {
         prompt_title = "\\ Find Files /",
@@ -106,19 +107,19 @@ function M.find_files()
         -- cwd = '~/',
     }
     require'telescope.builtin'.find_files(opts)
-    -- require'telescope.builtin'.file_browser(opts)
 end
 
 function M.file_browser()
     local opts = {
         prompt_title = "\\ Files Browser/",
         follow = 'true',
-        hidden = 'false',
-        layout_strategy = "vertical",
+        -- hidden = 'false',
+        -- layout_strategy = "vertical",
+        layout_strategy = "horizontal",
         layout_config = {
-            width = 0.9,
+            width = 0.95,
         },
-        cwd = '~/',
+        -- cwd = '~/',
     }
     require'telescope.builtin'.file_browser(opts)
 end
