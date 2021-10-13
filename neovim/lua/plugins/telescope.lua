@@ -126,8 +126,10 @@ end
 
 function M.grep_string()
     local opts = {
+        prompt_title = "\\ Secondary Grep /",
+        layout_strategy = "horizontal",
         layout_config = {
-            width = 0.7,
+            width = 0.9,
         },
         search = vim.fn.input('Rg> '),
     }
@@ -172,8 +174,11 @@ end
 function M.git_commits()
     -- 
     local opts = {
+        prompt_title = "\\ Git Commits /",
+        -- layout_strategy = "horizontal",
+        layout_strategy = "vertical",
         layout_config = {
-            width = 0.7,
+            width = 0.9,
         },
         prompt_prefix = '  ',
     }
