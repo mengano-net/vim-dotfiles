@@ -277,7 +277,6 @@ utils.map('n', '<leader>gs', ':lua require(\'plugins.telescope\').grep_string()<
 utils.map('n', '<leader>jl', ':lua require(\'plugins.telescope\').jumplist()<cr>')
 utils.map('n', '<leader>lg', ':lua require(\'plugins.telescope\').live_grep()<cr>')
 utils.map('n', '<leader>nc', ':lua require(\'plugins.telescope\').neovim_config()<cr>')
-utils.map('n', '<leader>gf', ':lua require(\'plugins.telescope\').git_files()<cr>')
 utils.map('n', '<leader>gb', ':lua require(\'plugins.telescope\').git_branches()<cr>')
 utils.map('n', '<leader>gc', ':lua require(\'plugins.telescope\').git_commits()<cr>')
 utils.map('n', '<leader>ch', ':lua require(\'plugins.telescope\').command_history()<cr>')

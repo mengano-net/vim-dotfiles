@@ -3,7 +3,7 @@
 local M = {}                                            -- The module to export
 
 
--- Telescope setup
+-- My default Telescope options
 local actions = require('telescope.actions')
 require('telescope').setup  {
     defaults = {
@@ -70,6 +70,26 @@ local telescope_picker_opts_default = {
     },
 }
 
+-- Returns true if current directory is a git worktree
+function M.is_git_worktree()
+    local _, ret, stderr = require'telescope.utils'.get_os_command_output(
+    {
+        'git', 'rev-parse', '--is-inside-work-tree'
+    })
+    -- print(vim.inspect(ret))
+    if ret == 0 then
+        print('yes')
+        return true
+    else
+        print('no')
+        return false
+    end
+end
+
+--[[
+Opens a file picker with Neovim configuration files to make a quick edit,
+useful to make quick changes to Neovim's configuration without having to CDW
+]]
 function M.neovim_config()
     -- local cwd_neovim_config = ''
     -- local USER = vim.fn.expand('$USER')
@@ -109,19 +129,33 @@ function M.find_files()
     require'telescope.builtin'.find_files(opts)
 end
 
+--[[
+This function evaluates if we are inside a directory managed by git,
+if true, it runs function git_files(), otherwise it runs telescope's
+builtin file_browser() function.
+]]
 function M.file_browser()
-    local opts = {
-        prompt_title = "\\ Files Browser/",
-        follow = 'true',
-        -- hidden = 'false',
-        -- layout_strategy = "vertical",
-        layout_strategy = "horizontal",
-        layout_config = {
-            width = 0.95,
-        },
-        -- cwd = '~/',
-    }
-    require'telescope.builtin'.file_browser(opts)
+    local _, ret, stderr = require'telescope.utils'.get_os_command_output(
+    {
+        'git', 'rev-parse', '--is-inside-work-tree'
+    })
+    -- print(vim.inspect(ret))
+    if ret == 0 then
+        M.git_files()
+    else
+        local opts = {
+            prompt_title = "\\ Files Browser/",
+            follow = 'true',
+            -- hidden = 'false',
+            -- layout_strategy = "vertical",
+            layout_strategy = "horizontal",
+            layout_config = {
+                width = 0.95,
+            },
+            -- cwd = '~/',
+        }
+        require'telescope.builtin'.file_browser(opts)
+    end
 end
 
 function M.grep_string()
@@ -150,11 +184,14 @@ end
 function M.git_files()
     local opts = {
         prompt_title = "\\ Git Files /",
-        -- layout_strategy = "horizontal",
+        follow = 'true',
+        -- hidden = 'false',
+        -- layout_strategy = "vertical",
+        layout_strategy = "horizontal",
         layout_config = {
-            width = 0.7,
+            width = 0.95,
         },
-        prompt_prefix = '  ',
+        -- cwd = '~/',
     }
     require'telescope.builtin'.git_files(opts)
 end
