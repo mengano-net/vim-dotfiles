@@ -253,6 +253,7 @@ function M.notes()
         },
         cwd = '~/bitbucket.org/mine/it/',
         prompt_prefix = '   ',
+        depth = 2,
     }
     require'telescope.builtin'.file_browser(opts)
 end
