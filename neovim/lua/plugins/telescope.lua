@@ -77,13 +77,7 @@ function M.is_git_worktree()
         'git', 'rev-parse', '--is-inside-work-tree'
     })
     -- print(vim.inspect(ret))
-    if ret == 0 then
-        print('yes')
-        return true
-    else
-        print('no')
-        return false
-    end
+    if ret == 0 then return true else return false end
 end
 
 --[[
@@ -135,12 +129,8 @@ if true, it runs function git_files(), otherwise it runs telescope's
 builtin file_browser() function.
 ]]
 function M.file_browser()
-    local _, ret, stderr = require'telescope.utils'.get_os_command_output(
-    {
-        'git', 'rev-parse', '--is-inside-work-tree'
-    })
-    -- print(vim.inspect(ret))
-    if ret == 0 then
+    local _is_git_worktree = M.is_git_worktree()
+    if _is_git_worktree then
         M.git_files()
     else
         local opts = {
@@ -205,21 +195,33 @@ function M.git_branches()
         },
         prompt_prefix = '  ',
     }
-    require'telescope.builtin'.git_branches(opts)
+    local _is_git_worktree = M.is_git_worktree()
+    if _is_git_worktree then
+        require'telescope.builtin'.git_branches(opts)
+    else
+        print('Not a git worktree directory')
+        return
+    end
 end
 
 function M.git_commits()
     -- 
     local opts = {
         prompt_title = "\\ Git Commits /",
-        -- layout_strategy = "horizontal",
-        layout_strategy = "vertical",
+        layout_strategy = "horizontal",
+        -- layout_strategy = "vertical",
         layout_config = {
             width = 0.9,
         },
         prompt_prefix = '  ',
     }
-    require'telescope.builtin'.git_commits(opts)
+    local _is_git_worktree = M.is_git_worktree()
+    if _is_git_worktree then
+        require'telescope.builtin'.git_commits(opts)
+    else
+        print('Not a git worktree directory')
+        return
+    end
 end
 
 function M.command_history()
@@ -253,7 +255,6 @@ function M.notes()
         },
         cwd = '~/bitbucket.org/mine/it/',
         prompt_prefix = '   ',
-        depth = 2,
     }
     require'telescope.builtin'.file_browser(opts)
 end
