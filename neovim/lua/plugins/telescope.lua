@@ -136,13 +136,13 @@ function M.file_browser()
         local opts = {
             prompt_title = "\\ Files Browser/",
             follow = 'true',
-            hidden = 'false',
+            -- hidden = 'false',
             -- layout_strategy = "vertical",
             layout_strategy = "horizontal",
             layout_config = {
                 width = 0.95,
             },
-            cwd = '%p',
+            -- cwd = '%p',
         }
         require'telescope.builtin'.file_browser(opts)
     end
