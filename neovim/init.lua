@@ -192,7 +192,6 @@ require "paq" {
     'kyazdani42/nvim-web-devicons';             -- devicons
     'hoob3rt/lualine.nvim';                     -- light-weight lua status line
     'airblade/vim-gitgutter';                   -- Git gutter
-    '9mm/vim-closer';                           -- better automatic closing of parenths, etc
 
     -- Telescope
     'nvim-lua/popup.nvim';
