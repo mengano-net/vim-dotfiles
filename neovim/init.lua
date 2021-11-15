@@ -110,11 +110,10 @@ cmd[[
 
 syntax enable
 set background=dark
-" colorscheme gruvbox
-" colorscheme gruvbox-flat
 let g:onedark_style = 'deep'
 " colorscheme onedark
 colorscheme gruvbox8_hard
+" colorscheme gruvbox-flat
 
 augroup highlight_on_yank
     autocmd!
@@ -179,8 +178,6 @@ require "paq" {
     'savq/paq-nvim';                            -- Let Paq manage itself
 
     -- Color Schemes
-    -- 'morhetz/gruvbox';                          -- gruxbox colorscheme
-    -- 'eddyekofo94/gruvbox-flat.nvim';            -- An nvim colorscheme base on gruvbox
     -- 'navarasu/onedark.nvim';
     'lifepillar/vim-gruvbox8';
 
