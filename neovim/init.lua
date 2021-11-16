@@ -9,21 +9,40 @@ require'plugins.lsp'                                    -- my treesitter and LSP
 local utils = require'utils'                            -- my own utlities module
 
 -- lualine plugin
+-- require('lualine').setup()
 require('lualine').setup {
   options = {
-    -- theme = 'onedark',
-    theme = 'gruvbox',
+    theme = 'onedark',
+    -- theme = 'gruvbox',
     icons_enabled = true,
     extensions = {'fugitive'},
-    lualine_x = {
-        {
-            'diagnostics',
-            sources = {"nvim_lsp"},
-            symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
-        },
-        -- 'encoding',
-        'filetype',
-    },
+  },
+  sections = {
+      lualine_a = {
+          'mode',
+          -- 'buffers'
+      },
+      lualine_b = {
+          'branch',
+          'diff',
+      },
+      lualine_c = {
+          {
+              'filename',           -- displays file status (readonly status, modified status)
+              file_status = true,   -- 0 = just filename, 1 = relative path, 2 = absolute path
+              path = 1,             -- Shortens path to leave 40 space in the window
+        }
+      },
+      lualine_x = {
+          {
+              'diagnostics',
+              sources = {"nvim_lsp"},
+              symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '},
+          },
+          'fileformat',
+          'filetype',
+      },
+      lualine_y = {},
   }
 }
 
@@ -111,8 +130,8 @@ cmd[[
 syntax enable
 set background=dark
 let g:onedark_style = 'deep'
-" colorscheme onedark
-colorscheme gruvbox8_hard
+colorscheme onedark
+" colorscheme gruvbox8_hard
 " colorscheme gruvbox-flat
 
 augroup highlight_on_yank
@@ -178,7 +197,7 @@ require "paq" {
     'savq/paq-nvim';                            -- Let Paq manage itself
 
     -- Color Schemes
-    -- 'navarasu/onedark.nvim';
+    'navarasu/onedark.nvim';
     'lifepillar/vim-gruvbox8';
 
     'ap/vim-buftabline';                        -- show buffers on tabline
