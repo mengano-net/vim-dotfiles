@@ -13,8 +13,9 @@ local utils = require'utils'                            -- my own utlities modul
 -- require('lualine').setup()
 require('lualine').setup {
     options = {
-        theme = 'onedark',
+        -- theme = 'onedark',
         -- theme = 'gruvbox',
+        theme = 'sonokai',
         icons_enabled = true,
         extensions = {'fugitive'},
     },
@@ -66,6 +67,9 @@ local bo 		= vim.bo                                -- to set options with a buff
 -- Global variables
 -- g.gruvbox_flat_style = 'dark'
 -- g.gruvbox_colors = { bg = "#1d2021" }				-- overwriting background color
+g.sonokai_style = 'maia'
+g.sonokai_enable_italic = 1
+g.sonokai_disable_italic_comment = 1
 g.mapleader = ' '
 
 -- Global options; these apply to all buffers
@@ -131,7 +135,8 @@ cmd[[
 syntax enable
 set background=dark
 let g:onedark_style = 'deep'
-colorscheme onedark
+" colorscheme onedark
+colorscheme sonokai
 " colorscheme gruvbox8_hard
 " colorscheme gruvbox-flat
 
@@ -200,6 +205,9 @@ require "paq" {
     -- Color Schemes
     'navarasu/onedark.nvim';
     'lifepillar/vim-gruvbox8';
+    'EdenEast/nightfox.nvim';
+    'savq/melange';
+    'sainnhe/sonokai';
 
     'akinsho/bufferline.nvim';                  -- show buffers on tabline
     'tpope/vim-fugitive';                       -- A Git wrapper
