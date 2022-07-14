@@ -18,3 +18,4 @@ documentation there please for some general information about this wonderful plu
 - copy `~/.vim/mappings.vim` into the same location in your local file system.
 - copy `~/.vimrc` into the same location in your file system.
 - launch vim, then issue command `:PlugIntall` to install all plug-ins. 
+
