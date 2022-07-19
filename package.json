@@ -1,0 +1,23 @@
+{
+  "name": "vim-dotfiles",
+  "version": "1.0.0",
+  "description": "vim dotfiles, this is deprecated, just testing husky.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mengano-net/vim-dotfiles.git"
+  },
+  "author": "Alex Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mengano-net/vim-dotfiles/issues"
+  },
+  "homepage": "https://github.com/mengano-net/vim-dotfiles#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
+}
