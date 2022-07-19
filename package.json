@@ -19,5 +19,6 @@
   "homepage": "https://github.com/mengano-net/vim-dotfiles#readme",
   "devDependencies": {
     "husky": "^8.0.0"
-  }
+  },
+  "husky": {}
 }
