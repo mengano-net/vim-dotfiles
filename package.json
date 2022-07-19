@@ -4,7 +4,7 @@
   "description": "vim dotfiles, this is deprecated, just testing husky.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "echo \"\" && exit 0",
     "prepare": "husky install"
   },
   "repository": {
