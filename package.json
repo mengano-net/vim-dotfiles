@@ -21,6 +21,8 @@
     "husky": "^8.0.0"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
   }
 }
